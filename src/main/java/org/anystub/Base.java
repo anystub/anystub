@@ -83,6 +83,24 @@ public class Base {
         BaseManagerImpl.instance().register(this);
     }
 
+    /**
+     * if filename holds only filename (without path) then creates file in src/test/resources/anystub/
+     * examples:
+     * * new Base("./stub.yml") uses file in current dir
+     * * new Base("stub.yml") uses src/test/resources/anystub/stub.yml
+     * <p>
+     * Note: Consider using {@link BaseManagerImpl} instead
+     *
+     * @param filename used file name
+     * @param notRegistered must be true
+     */
+    public Base(String filename, boolean notRegistered) {
+        if (!notRegistered) {
+            throw new UnsupportedOperationException();
+        }
+        this.filePath = BaseManagerImpl.getFilePath(filename);
+    }
+
 
     /**
      * set constrains for using cache and getting access a source system

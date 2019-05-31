@@ -1,10 +1,17 @@
 package org.anystub.mgmt;
 
+import org.anystub.AnyStubId;
 import org.anystub.Base;
+import org.anystub.Document;
 import org.junit.Test;
 
 import java.io.File;
+import java.util.stream.Stream;
 
+import static org.anystub.http.HttpUtil.HTTP_PROPERTY;
+import static org.anystub.http.HttpUtil.HTTP_PROPERTY_BODY;
+import static org.anystub.mgmt.BaseManagerImpl.getStub;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class BaseManagerImplTest {
@@ -39,4 +46,21 @@ public class BaseManagerImplTest {
         assertTrue(BaseManagerImpl.getFilePath("./test3.yml").endsWith(File.separator + "test3.yml"));
     }
 
+    @Test
+    @AnyStubId
+    public void testInitializer()  {
+       BaseManagerImpl.setDefaultInitializer(base->
+               base.addProperty("aaa", "bbbb"));
+
+
+        Stream<Document> property;
+        assertEquals(1, getStub().getProperty("aaa").count());
+        assertEquals("bbbb", getStub().getProperty("aaa").findFirst().get().get());
+
+
+        assertEquals(1, getStub("xxxx.yml").getProperty("aaa").count());
+        assertEquals("bbbb", getStub("xxxx.yml").getProperty("aaa").findFirst().get().get());
+
+        BaseManagerImpl.setDefaultInitializer(null);
+    }
 }

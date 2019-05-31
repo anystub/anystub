@@ -12,7 +12,12 @@ import org.apache.http.impl.client.HttpClients;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.function.Consumer;
+import java.util.stream.Stream;
 
+import static org.anystub.http.HttpUtil.HTTP_PROPERTY;
+import static org.anystub.http.HttpUtil.HTTP_PROPERTY_BODY;
+import static org.anystub.http.StubHttpClient.addBodyRule;
 import static org.anystub.mgmt.BaseManagerImpl.getStub;
 import static org.junit.Assert.assertEquals;
 
@@ -68,7 +73,7 @@ public class StubHttpClientTest {
     @Test
     @AnyStubId
     public void executePostTest() throws IOException {
-        StubHttpClient.addBodyRule("randomX");
+        addBodyRule("randomX");
 
         HttpClient real = HttpClients.createDefault();
         StubHttpClient result = new StubHttpClient(real);
@@ -85,5 +90,7 @@ public class StubHttpClientTest {
         assertEquals(1, getStub().times(null,null,null,"{\"a\":1}"));
 
     }
+
+
 
 }

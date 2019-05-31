@@ -8,11 +8,13 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class BaseManagerImpl implements BaseManager {
     private static BaseManagerImpl baseManager = new BaseManagerImpl();
     private final List<Base> list = new ArrayList<>();
+    private Consumer<Base> defaultInitializer = null;
 
     public static BaseManagerImpl instance() {
         return baseManager;
@@ -29,14 +31,19 @@ public class BaseManagerImpl implements BaseManager {
 
     public Base getBase(String filename) {
 
-        String fullPath = filename == null || filename.isEmpty() ?
+        String fullPath = ((filename == null) || filename.isEmpty()) ?
                 getFilePath() :
                 getFilePath(filename);
 
         return get(fullPath).orElseGet(new Supplier<Base>() {
             @Override
             public Base get() {
-                return new Base(fullPath);
+                Base base = new Base(fullPath, true);
+                if (defaultInitializer != null) {
+                    defaultInitializer.accept(base);
+                }
+                list.add(base);
+                return base;
             }
         });
     }
@@ -93,5 +100,10 @@ public class BaseManagerImpl implements BaseManager {
         return BaseManagerImpl
                 .instance()
                 .getBase();
+    }
+
+
+    public static void setDefaultInitializer(Consumer<Base> defaultInitializer) {
+        BaseManagerImpl.instance().defaultInitializer = defaultInitializer;
     }
 }

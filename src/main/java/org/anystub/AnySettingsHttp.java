@@ -1,4 +1,4 @@
-package org.anystub.http;
+package org.anystub;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

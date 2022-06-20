@@ -1,6 +1,7 @@
 package org.anystub;
 
 import java.lang.reflect.Method;
+import java.util.Arrays;
 
 public class AnyStubFileLocator {
 
@@ -66,6 +67,18 @@ public class AnyStubFileLocator {
             id = method.getAnnotation(AnyStubId.class);
         } catch (NoSuchMethodException ignored) {
             id = null;
+        }
+        if (id == null) {
+            Method methodStream = Arrays.stream(aClass.getDeclaredMethods())
+                    .filter(method -> method.getName().equals(s.getMethodName()))
+                    .filter(method -> method.getAnnotation(AnyStubId.class) != null)
+                    .findAny().orElse(null);
+
+            if (methodStream != null) {
+                id = methodStream.getAnnotation(AnyStubId.class);
+            } else {
+                id = null;
+            }
         }
         return id;
     }

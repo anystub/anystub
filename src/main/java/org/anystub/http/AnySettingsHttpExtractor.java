@@ -1,5 +1,7 @@
 package org.anystub.http;
 
+import org.anystub.AnySettingsHttp;
+
 import java.lang.reflect.Method;
 
 public class AnySettingsHttpExtractor {

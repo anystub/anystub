@@ -1,7 +1,7 @@
 package org.anystub.it_http;
 
 import org.anystub.AnyStubId;
-import org.anystub.http.AnySettingsHttp;
+import org.anystub.AnySettingsHttp;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

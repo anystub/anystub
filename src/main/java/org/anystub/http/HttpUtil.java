@@ -1,5 +1,7 @@
 package org.anystub.http;
 
+import org.anystub.AnySettingsHttp;
+import org.anystub.SettingsUtil;
 import org.anystub.Util;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
@@ -257,38 +259,12 @@ public class HttpUtil {
 
 
     private static boolean matchBodyRule(String url) {
-        Set<String> currentBodyTriggers = new HashSet<>();
-
-        AnySettingsHttp settings = AnySettingsHttpExtractor.discoverSettings();
-
-        if (settings != null) {
-            currentBodyTriggers.addAll(asList(settings.bodyTrigger()));
-        }
-
-        if ((settings == null || !settings.overrideGlobal()) && globalBodyTrigger != null) {
-            currentBodyTriggers.addAll(asList(globalBodyTrigger));
-        }
-
-
-        return currentBodyTriggers.stream()
-                .anyMatch(url::contains);
+        return SettingsUtil.matchBodyRule(url);
     }
 
 
     private static String maskBody(String s) {
-        Set<String> currentBodyMask = new HashSet<>();
-
-        AnySettingsHttp settings = AnySettingsHttpExtractor.discoverSettings();
-        if (settings != null) {
-            currentBodyMask.addAll(asList(settings.bodyMask()));
-        }
-
-        if ((settings != null || !settings.overrideGlobal()) && globalBodyMask != null) {
-            currentBodyMask.addAll(asList(globalBodyMask));
-        }
-
-        return currentBodyMask.stream()
-                .reduce(s, (r, m) -> r.replaceAll(m, "..."));
+        return SettingsUtil.maskBody(s);
     }
 
     public static String headerToString(Header h) {

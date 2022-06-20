@@ -1,6 +1,5 @@
 package org.anystub;
 
-import org.anystub.http.AnySettingsHttp;
 import org.anystub.http.StubHttpClient;
 import org.anystub.mgmt.BaseManagerFactory;
 import org.apache.http.HttpHost;

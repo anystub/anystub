@@ -1,7 +1,11 @@
 package org.anystub.http;
 
 import org.anystub.AnySettingsHttp;
+import org.anystub.AnySettingsHttpExtractor;
+import org.anystub.HttpGlobalSettings;
 import org.anystub.SettingsUtil;
+//import org.anystub.Util;
+import org.anystub.StringUtil;
 import org.anystub.Util;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
@@ -33,16 +37,14 @@ import java.util.stream.Collectors;
 import static java.lang.Integer.parseInt;
 import static java.util.Arrays.asList;
 import static java.util.Arrays.stream;
+import static org.anystub.HttpGlobalSettings.globalHeaders;
 import static org.anystub.Util.escapeCharacterString;
+//import static org.anystub.Util.escapeCharacterString;
 
 public class HttpUtil {
 
     private static final Logger LOGGER = Logger.getLogger(HttpUtil.class.getName());
 
-    public static boolean globalAllHeaders = false;
-    public static String[] globalHeaders = {};
-    public static String[] globalBodyTrigger = {};
-    public static String[] globalBodyMask = {};
     private static final String HEADER_MASK = "^[A-Za-z0-9\\-]+: .+";
 
     private HttpUtil() {
@@ -76,7 +78,7 @@ public class HttpUtil {
         if (postHeader != null) {
             BasicHttpEntity httpEntity = new BasicHttpEntity();
 
-            byte[] bytes = Util.recoverBinaryData(postHeader);
+            byte[] bytes = StringUtil.recoverBinaryData(postHeader);
             httpEntity.setContentLength(bytes.length);
             httpEntity.setContent(new ByteArrayInputStream(bytes));
             basicHttpResponse.setEntity(httpEntity);
@@ -220,7 +222,7 @@ public class HttpUtil {
 
     public static List<String> encodeHeaders(HttpRequest httpRequest) {
 
-        boolean currentAllHeaders = HttpUtil.globalAllHeaders;
+        boolean currentAllHeaders = HttpGlobalSettings.globalAllHeaders;
 
         AnySettingsHttp settings = AnySettingsHttpExtractor.discoverSettings();
 

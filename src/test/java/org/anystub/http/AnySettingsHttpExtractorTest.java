@@ -2,11 +2,15 @@ package org.anystub.http;
 
 
 import org.anystub.AnySettingsHttp;
+import org.anystub.AnySettingsHttpExtractor;
 import org.anystub.AnyStubFileLocator;
 import org.anystub.AnyStubId;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @AnySettingsHttp(headers = "classHeader")
 public class AnySettingsHttpExtractorTest {

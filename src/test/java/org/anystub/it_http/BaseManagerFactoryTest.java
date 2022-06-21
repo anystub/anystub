@@ -2,6 +2,7 @@ package org.anystub.it_http;
 
 import org.anystub.AnyStubId;
 import org.anystub.Base;
+import org.anystub.HttpGlobalSettings;
 import org.anystub.http.HttpUtil;
 import org.anystub.mgmt.BaseManagerFactory;
 import org.junit.jupiter.api.Test;
@@ -32,7 +33,7 @@ public class BaseManagerFactoryTest {
         assertEquals(1, getStub().times());
         assertEquals(1, getStub().timesEx(null, null, "https.*"));
 
-        HttpUtil.globalAllHeaders = true;
+        HttpGlobalSettings.globalAllHeaders = true;
 
         forEntity = restTemplate.getForEntity("https://gturnquist-quoters.cfapps.io/api/random", String.class);
         assertEquals(200, forEntity.getStatusCodeValue());
@@ -40,7 +41,7 @@ public class BaseManagerFactoryTest {
         assertEquals(1, getStub().timesEx(null, null, "Accept:.*"));
 
 
-        HttpUtil.globalAllHeaders = false;
+        HttpGlobalSettings.globalAllHeaders = false;
 
         forEntity = restTemplate.getForEntity("https://gturnquist-quoters.cfapps.io/api/random", String.class);
         assertEquals(200, forEntity.getStatusCodeValue());

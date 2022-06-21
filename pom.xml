@@ -47,9 +47,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.yaml</groupId>
-            <artifactId>snakeyaml</artifactId>
-            <version>1.30</version>
+            <groupId>org.anystub</groupId>
+            <artifactId>anystub-core</artifactId>
+            <version>0.8.0</version>
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>

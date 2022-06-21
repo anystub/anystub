@@ -1,5 +1,6 @@
 package org.anystub.jdbc;
 
+import org.anystub.StringUtil;
 import org.anystub.Util;
 
 import javax.sql.rowset.serial.SerialBlob;
@@ -22,7 +23,7 @@ public class SqlTypeEncoder {
     }
 
     public static Blob decodeBlob(String next) {
-        byte[] bytes = Util.recoverBinaryData(next);
+        byte[] bytes = StringUtil.recoverBinaryData(next);
         try {
             return new SerialBlob(bytes);
         } catch (SQLException e) {
@@ -44,7 +45,7 @@ public class SqlTypeEncoder {
     }
 
     public static Clob decodeClob(String next) {
-        byte[] bytes = Util.recoverBinaryData(next);
+        byte[] bytes = StringUtil.recoverBinaryData(next);
         try (CharArrayWriter charArrayWriter = new CharArrayWriter()) {
             for (byte b : bytes) {
                 charArrayWriter.write(b);
@@ -80,7 +81,7 @@ public class SqlTypeEncoder {
 
 
     public static RowId decodeRowid(String next) {
-        byte[] bytes = Util.recoverBinaryData(next);
+        byte[] bytes = StringUtil.recoverBinaryData(next);
         return new StubRowId(bytes);
     }
 

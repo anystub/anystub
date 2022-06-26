@@ -1,5 +1,9 @@
-package org.anystub;
+package org.anystub.http;
 
+import org.anystub.AnySettingsHttp;
+import org.anystub.AnyStubId;
+import org.anystub.Base;
+import org.anystub.RequestMode;
 import org.anystub.http.StubHttpClient;
 import org.anystub.mgmt.BaseManagerFactory;
 import org.apache.http.HttpHost;

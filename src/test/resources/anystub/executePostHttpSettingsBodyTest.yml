@@ -7,3 +7,21 @@ request0:
     'Date: Sat, 30 Nov 2019 22:32:54 GMT', 'X-Vcap-Request-Id: c8d2699e-5425-4d58-448f-fee30cf8882b',
     'Content-Length: 163', 'Connection: keep-alive', '{"timestamp":"2019-11-30T22:32:55.019+0000","status":405,"error":"Method
       Not Allowed","message":"Request method ''POST'' not supported","path":"/api/randomX-stream"}']
+request1:
+  exception: []
+  keys: [POST, HTTP/1.1, 'Content-Type: plain/text; charset=UTF-8', 'HEADER: 1', 'HEADER2:
+      2', 'HEADER3: 3', 'https://gturnquist-quoters.cfapps.io:443/api/randomX-stream',
+    '...v...e...r...y...-...s...t...r...i...n...g...']
+  values:
+  - HTTP/1.1
+  - '404'
+  - Not Found
+  - 'Cache-Control: no-cache, no-store'
+  - 'Content-Type: text/plain; charset=utf-8'
+  - 'Date: Sat, 25 Jun 2022 21:29:10 GMT'
+  - 'X-Cf-Routererror: unknown_route'
+  - 'X-Content-Type-Options: nosniff'
+  - 'Content-Length: 80'
+  - 'Connection: keep-alive'
+  - |
+    404 Not Found: Requested route ('gturnquist-quoters.cfapps.io') does not exist.

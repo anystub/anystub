@@ -4,7 +4,6 @@ import org.anystub.DecoderSimple;
 import org.anystub.EncoderSimple;
 import org.anystub.StringUtil;
 import org.anystub.Supplier;
-import org.anystub.Util;
 
 import javax.sql.rowset.serial.SerialRef;
 import java.io.InputStream;

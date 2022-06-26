@@ -4,9 +4,7 @@ import org.anystub.AnySettingsHttp;
 import org.anystub.AnySettingsHttpExtractor;
 import org.anystub.HttpGlobalSettings;
 import org.anystub.SettingsUtil;
-//import org.anystub.Util;
 import org.anystub.StringUtil;
-import org.anystub.Util;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpEntityEnclosingRequest;
@@ -38,14 +36,13 @@ import static java.lang.Integer.parseInt;
 import static java.util.Arrays.asList;
 import static java.util.Arrays.stream;
 import static org.anystub.HttpGlobalSettings.globalHeaders;
-import static org.anystub.Util.escapeCharacterString;
-//import static org.anystub.Util.escapeCharacterString;
+import static org.anystub.StringUtil.escapeCharacterString;
 
 public class HttpUtil {
 
     private static final Logger LOGGER = Logger.getLogger(HttpUtil.class.getName());
 
-    private static final String HEADER_MASK = "^[A-Za-z0-9\\-]+: .+";
+    private static final String HEADER_MASK = "^[A-Za-z0-9\\-_]+: .+";
 
     private HttpUtil() {
     }
@@ -132,9 +129,9 @@ public class HttpUtil {
         if (bytes == null) {
             return Optional.empty();
         }
-        String entityText = Util.toCharacterString(bytes);
+        String entityText = StringUtil.toCharacterString(bytes);
         if (entityText.matches(HEADER_MASK)) {
-            entityText = Util.addTextPrefix(entityText);
+            entityText = StringUtil.addTextPrefix(entityText);
         }
 
         return Optional.of(entityText);
@@ -202,13 +199,13 @@ public class HttpUtil {
         if (matchBodyRule(fullUrl)) {
             byte[] bytes = extractEntity(httpRequest);
             if (bytes != null) {
-                if (Util.isText(bytes)) {
+                if (StringUtil.isText(bytes)) {
                     String bodyText = maskBody(new String(bytes, StandardCharsets.UTF_8));
                     strings.add(escapeCharacterString(bodyText));
                 } else {
                     // omit changes fot binary data
                     // TODO: implement search substring for binary data
-                    strings.add(Util.toCharacterString(bytes));
+                    strings.add(StringUtil.toCharacterString(bytes));
                 }
             }
         }

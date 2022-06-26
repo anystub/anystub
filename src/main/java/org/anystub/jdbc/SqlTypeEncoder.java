@@ -1,7 +1,7 @@
 package org.anystub.jdbc;
 
 import org.anystub.StringUtil;
-import org.anystub.Util;
+import org.anystub.StringUtil;
 
 import javax.sql.rowset.serial.SerialBlob;
 import javax.sql.rowset.serial.SerialClob;
@@ -36,7 +36,7 @@ public class SqlTypeEncoder {
         try {
             byte[] bytes = blob.getBytes(1, (int) blob.length());
 
-            String s = Util.toCharacterString(bytes);
+            String s = StringUtil.toCharacterString(bytes);
             blob.free();
             return s;
         } catch (SQLException e) {
@@ -65,7 +65,7 @@ public class SqlTypeEncoder {
                 charArrayWriter.write(i);
             }
 
-            return  Util.toCharacterString(charArrayWriter.toString().getBytes());
+            return  StringUtil.toCharacterString(charArrayWriter.toString().getBytes());
         } catch (SQLException | IOException e) {
             throw new UnsupportedOperationException("failed to extract clob", e);
         }
@@ -86,7 +86,7 @@ public class SqlTypeEncoder {
     }
 
     public static String encodeRowid(RowId rowId) {
-        return Util.toCharacterString(rowId.getBytes());
+        return StringUtil.toCharacterString(rowId.getBytes());
     }
 
     public static SQLXML decodeSQLXML(String s) {

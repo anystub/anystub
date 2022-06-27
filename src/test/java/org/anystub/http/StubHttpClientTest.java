@@ -25,7 +25,7 @@ import java.nio.charset.StandardCharsets;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-public class StubHttpClientTest {
+class StubHttpClientTest {
 
     @Test
     @AnyStubId(filename = "httpStub-static.yml")

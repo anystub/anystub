@@ -49,7 +49,7 @@
         <dependency>
             <groupId>org.anystub</groupId>
             <artifactId>anystub-core</artifactId>
-            <version>0.8.1-SNAPSHOT</version>
+            <version>0.8.1</version>
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
@@ -200,32 +200,6 @@
                 <artifactId>maven-deploy-plugin</artifactId>
                 <version>3.0.0-M2</version>
             </plugin>
-
-<!--                <plugin>-->
-<!--                    <groupId>org.openapitools</groupId>-->
-<!--                    <artifactId>openapi-generator-maven-plugin</artifactId>-->
-<!--                    <version>5.3.1-SNAPSHOT</version>-->
-<!--                    <executions>-->
-<!--                        <execution>-->
-<!--                            <id>main-files</id>-->
-<!--                            <goals>-->
-<!--                                <goal>generate</goal>-->
-<!--                            </goals>-->
-<!--                            <configuration>-->
-<!--                                <inputSpec>${project.basedir}/api.json</inputSpec>-->
-<!--                                <generatorName>java</generatorName>-->
-<!--                                <library>resttemplate</library>-->
-<!--                                <templateDirectory>${project.basedir}/src/main/resources/Java</templateDirectory>-->
-<!--                                <additionalProperties>restTemplateName=restTemplate</additionalProperties>-->
-<!--                                <generateModelTests>false</generateModelTests>-->
-<!--                                <configOptions>-->
-<!--                                    <dateLibrary>java8</dateLibrary>-->
-<!--                                </configOptions>-->
-<!--                            </configuration>-->
-<!--                        </execution>-->
-<!--                    </executions>-->
-<!--                </plugin>-->
-
         </plugins>
     </build>
 

@@ -1,7 +1,6 @@
 package org.anystub.jdbc;
 
 import org.anystub.StringUtil;
-import org.anystub.StringUtil;
 
 import javax.sql.rowset.serial.SerialBlob;
 import javax.sql.rowset.serial.SerialClob;

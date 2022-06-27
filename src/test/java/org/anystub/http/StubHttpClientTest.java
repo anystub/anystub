@@ -29,7 +29,7 @@ public class StubHttpClientTest {
 
     @Test
     @AnyStubId(filename = "httpStub-static.yml")
-    public void testexecuteGetTest() throws IOException {
+    void testexecuteGetTest() throws IOException {
 
         HttpClient real = HttpClients.createDefault();
         StubHttpClient result = new StubHttpClient(real);
@@ -43,7 +43,7 @@ public class StubHttpClientTest {
 
     @Test
     @AnyStubId(filename = "httpStub-static")
-    public void testexecuteHostUriTest() throws IOException {
+    void testexecuteHostUriTest() throws IOException {
 
         HttpClient real = HttpClients.createDefault();
         StubHttpClient result = new StubHttpClient(real);
@@ -57,7 +57,7 @@ public class StubHttpClientTest {
     }
 
     @Test
-    public void testExecuteResponseHandlerTest() throws IOException {
+    void testExecuteResponseHandlerTest() throws IOException {
 
         Base base = BaseManagerFactory.getBaseManager().getBase("testExecuteResponseHandlerTest.yml")
                 .constrain(RequestMode.rmNone);
@@ -77,7 +77,7 @@ public class StubHttpClientTest {
     @Test
     @AnyStubId(filename = "executePostTest")
     @AnySettingsHttp(bodyTrigger = "randomX")
-    public void testexecutePostTest() throws IOException {
+    void testexecutePostTest() throws IOException {
 
         HttpClient real = HttpClients.createDefault();
         StubHttpClient result = new StubHttpClient(real);
@@ -98,7 +98,7 @@ public class StubHttpClientTest {
     @Test
     @AnyStubId(filename = "executePostTextTest")
     @AnySettingsHttp(bodyTrigger = "randomX")
-    public void testexecutePostTextTest() throws IOException {
+    void testexecutePostTextTest() throws IOException {
 
         HttpClient real = HttpClients.createDefault();
         StubHttpClient result = new StubHttpClient(real);
@@ -120,7 +120,7 @@ public class StubHttpClientTest {
     @Test
     @AnyStubId(filename = "executePostStreamingTest")
     @AnySettingsHttp(bodyTrigger = "443")
-    public void testexecutePostStreamingTest() throws IOException {
+    void testexecutePostStreamingTest() throws IOException {
 
         HttpClient real = HttpClients.createDefault();
         StubHttpClient result = new StubHttpClient(real);
@@ -145,7 +145,7 @@ public class StubHttpClientTest {
     @Test
     @AnyStubId(filename = "executePostHttpSettingsTest")
     @AnySettingsHttp(headers = {"HEADER", "HEADER3"})
-    public void testexecutePostHttpSettingsTest() throws IOException {
+    void testexecutePostHttpSettingsTest() throws IOException {
 
         HttpClient real = HttpClients.createDefault();
         StubHttpClient result = new StubHttpClient(real);
@@ -172,7 +172,7 @@ public class StubHttpClientTest {
     @Test
     @AnyStubId(filename = "executePostHttpSettingsBodyTest")
     @AnySettingsHttp(allHeaders = true, bodyTrigger = "randomX-stream")
-    public void testexecutePostHttpSettingsBodyTest() throws IOException {
+    void testexecutePostHttpSettingsBodyTest() throws IOException {
 
         HttpClient real = HttpClients.createDefault();
         StubHttpClient result = new StubHttpClient(real);
@@ -202,7 +202,7 @@ public class StubHttpClientTest {
     @Test
     @AnyStubId(filename = "executePostHttpSettingsBodyMaskTest")
     @AnySettingsHttp(bodyTrigger = "ran928374", bodyMask = {"111", "222", "\\d\\d-\\d\\d-\\d\\d", "\\d\\d:\\d\\d"})
-    public void testexecutePostHttpSettingsBodyMaskTest() throws IOException {
+    void testexecutePostHttpSettingsBodyMaskTest() throws IOException {
 
         HttpClient real = HttpClients.createDefault();
         StubHttpClient result = new StubHttpClient(real);
@@ -226,7 +226,7 @@ public class StubHttpClientTest {
 
     @Test
     @AnyStubId(filename = "executePostMissingBodyTest")
-    public void testexecutePostMissingBodyTest() throws IOException {
+    void testexecutePostMissingBodyTest() throws IOException {
 
         StubHttpClient result = new StubHttpClient(null);
 

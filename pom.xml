@@ -193,7 +193,7 @@
 <!--                        <exclude>**/StubConnection.java</exclude>-->
 <!--                        <exclude>**/SqlTypeEncoder.java</exclude>-->
 <!--                        <exclude>**/StubCallableStatement.java</exclude>-->
-<!--                        <exclude>**/jdbc/*.java</exclude>-->
+                        <exclude>**/jdbc/*</exclude>
                     </excludes>
                 </configuration>
             </plugin>

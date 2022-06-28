@@ -188,12 +188,12 @@
                 </executions>
                 <configuration>
                     <excludes>
-                        <exclude>**/StubDatabaseMetaData.java</exclude>
+<!--                        <exclude>**/StubDatabaseMetaData.java</exclude>-->
 <!--                        <exclude>**/StubResultSet.java</exclude>-->
-                        <exclude>**/StubConnection.java</exclude>
-                        <exclude>**/SqlTypeEncoder.java</exclude>
-                        <exclude>**/StubCallableStatement.java</exclude>
-                        <exclude>**/jdbc/*.java</exclude>
+<!--                        <exclude>**/StubConnection.java</exclude>-->
+<!--                        <exclude>**/SqlTypeEncoder.java</exclude>-->
+<!--                        <exclude>**/StubCallableStatement.java</exclude>-->
+<!--                        <exclude>**/jdbc/*.java</exclude>-->
                     </excludes>
                 </configuration>
             </plugin>

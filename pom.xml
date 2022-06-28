@@ -189,7 +189,8 @@
                 <configuration>
                     <excludes>
 <!--                        <exclude>**/StubDatabaseMetaData.java</exclude>-->
-<!--                        <exclude>**/StubResultSet.java</exclude>-->
+                        <exclude>**/StubResultSet.java</exclude>
+                        <exclude>**/StubConnection.java</exclude>
 <!--                        <exclude>**/StubConnection.java</exclude>-->
 <!--                        <exclude>**/SqlTypeEncoder.java</exclude>-->
 <!--                        <exclude>**/StubCallableStatement.java</exclude>-->

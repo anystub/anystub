@@ -4,7 +4,7 @@
 
     <groupId>org.anystub</groupId>
     <artifactId>anystub</artifactId>
-    <version>0.7.11-SNAPSHOT</version>
+    <version>0.8.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>anystub</name>
@@ -47,9 +47,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.yaml</groupId>
-            <artifactId>snakeyaml</artifactId>
-            <version>1.30</version>
+            <groupId>org.anystub</groupId>
+            <artifactId>anystub-core</artifactId>
+            <version>0.8.1</version>
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
@@ -59,55 +59,47 @@
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <version>2.0.202</version>
+            <version>2.1.212</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
-            <version>2.5.6</version>
+            <version>2.7.0</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
-            <version>2.5.6</version>
+            <version>2.7.0</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
-            <version>5.3.13</version>
+            <version>5.3.20</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
-            <version>2.5.6</version>
+            <version>2.7.0</version>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>4.0.0</version>
+            <version>4.6.1</version>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>2.13.0</version>
+            <groupId>com.github.tomakehurst</groupId>
+            <artifactId>wiremock-jre8</artifactId>
+            <version>2.33.2</version>
+            <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.datatype</groupId>
-            <artifactId>jackson-datatype-jsr310</artifactId>
-            <version>2.13.0</version>
-        </dependency>
+
     </dependencies>
 
     <build>
         <plugins>
-<!--            <plugin>-->
-<!--                <groupId>org.springframework.boot</groupId>-->
-<!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
-<!--                <version>2.5.6</version>-->
-<!--            </plugin>-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -196,10 +188,13 @@
                 </executions>
                 <configuration>
                     <excludes>
-                        <exclude>**/StubDatabaseMetaData.java</exclude>
+<!--                        <exclude>**/StubDatabaseMetaData.java</exclude>-->
                         <exclude>**/StubResultSet.java</exclude>
-                        <exclude>**/StubCallableStatement.java</exclude>
-                        <exclude>test/java/**/*.java</exclude>
+                        <exclude>**/StubConnection.java</exclude>
+<!--                        <exclude>**/StubConnection.java</exclude>-->
+<!--                        <exclude>**/SqlTypeEncoder.java</exclude>-->
+<!--                        <exclude>**/StubCallableStatement.java</exclude>-->
+                        <exclude>**/jdbc/*</exclude>
                     </excludes>
                 </configuration>
             </plugin>
@@ -208,32 +203,6 @@
                 <artifactId>maven-deploy-plugin</artifactId>
                 <version>3.0.0-M2</version>
             </plugin>
-
-<!--                <plugin>-->
-<!--                    <groupId>org.openapitools</groupId>-->
-<!--                    <artifactId>openapi-generator-maven-plugin</artifactId>-->
-<!--                    <version>5.3.1-SNAPSHOT</version>-->
-<!--                    <executions>-->
-<!--                        <execution>-->
-<!--                            <id>main-files</id>-->
-<!--                            <goals>-->
-<!--                                <goal>generate</goal>-->
-<!--                            </goals>-->
-<!--                            <configuration>-->
-<!--                                <inputSpec>${project.basedir}/api.json</inputSpec>-->
-<!--                                <generatorName>java</generatorName>-->
-<!--                                <library>resttemplate</library>-->
-<!--                                <templateDirectory>${project.basedir}/src/main/resources/Java</templateDirectory>-->
-<!--                                <additionalProperties>restTemplateName=restTemplate</additionalProperties>-->
-<!--                                <generateModelTests>false</generateModelTests>-->
-<!--                                <configOptions>-->
-<!--                                    <dateLibrary>java8</dateLibrary>-->
-<!--                                </configOptions>-->
-<!--                            </configuration>-->
-<!--                        </execution>-->
-<!--                    </executions>-->
-<!--                </plugin>-->
-
         </plugins>
     </build>
 

@@ -1,5 +1,6 @@
-package org.anystub;
+package org.anystub.http;
 
+import org.anystub.EncoderResponseEntity;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

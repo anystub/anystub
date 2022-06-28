@@ -41,3 +41,19 @@ request4:
   - 'Connection: keep-alive'
   - |
     404 Not Found: Requested route ('gturnquist-quoters.cfapps.io') does not exist.
+request5:
+  exception: []
+  keys: [POST, HTTP/1.1, 'https://gturnquist-quoters.cfapps.io/api/random/xxx', '...{...t...e...s...t...}...']
+  values:
+  - HTTP/1.1
+  - '404'
+  - Not Found
+  - 'Cache-Control: no-cache, no-store'
+  - 'Content-Type: text/plain; charset=utf-8'
+  - 'Date: Sat, 25 Jun 2022 21:29:00 GMT'
+  - 'X-Cf-Routererror: unknown_route'
+  - 'X-Content-Type-Options: nosniff'
+  - 'Content-Length: 80'
+  - 'Connection: keep-alive'
+  - |
+    404 Not Found: Requested route ('gturnquist-quoters.cfapps.io') does not exist.

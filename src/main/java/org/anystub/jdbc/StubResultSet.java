@@ -2,8 +2,8 @@ package org.anystub.jdbc;
 
 import org.anystub.DecoderSimple;
 import org.anystub.EncoderSimple;
+import org.anystub.StringUtil;
 import org.anystub.Supplier;
-import org.anystub.Util;
 
 import javax.sql.rowset.serial.SerialRef;
 import java.io.InputStream;
@@ -316,8 +316,8 @@ public class StubResultSet implements ResultSet {
                                  return getRealResultSet().getAsciiStream(i);
                              }
                          },
-                        Util::recoverInputStream,
-                        Util::toCharacterString,
+                        StringUtil::recoverInputStream,
+                        StringUtil::toCharacterString,
                         callKey("getAsciiStream", i));
     }
 
@@ -333,8 +333,8 @@ public class StubResultSet implements ResultSet {
                                  return getRealResultSet().getUnicodeStream(i);
                              }
                          },
-                        Util::recoverInputStream,
-                        Util::toCharacterString,
+                        StringUtil::recoverInputStream,
+                        StringUtil::toCharacterString,
                         callKey("getUnicodeStream", i));
     }
 
@@ -350,8 +350,8 @@ public class StubResultSet implements ResultSet {
                                  return getRealResultSet().getBinaryStream(i);
                              }
                          },
-                        Util::recoverInputStream,
-                        Util::toCharacterString,
+                        StringUtil::recoverInputStream,
+                        StringUtil::toCharacterString,
                         callKey("getBinaryStream", i));
     }
 
@@ -582,8 +582,8 @@ public class StubResultSet implements ResultSet {
                                  return getRealResultSet().getAsciiStream(s);
                              }
                          },
-                        Util::recoverInputStream,
-                        Util::toCharacterString,
+                        StringUtil::recoverInputStream,
+                        StringUtil::toCharacterString,
                         callKey("getAsciiStream", s));
     }
 
@@ -599,8 +599,8 @@ public class StubResultSet implements ResultSet {
                                  return getRealResultSet().getUnicodeStream(s);
                              }
                          },
-                        Util::recoverInputStream,
-                        Util::toCharacterString,
+                        StringUtil::recoverInputStream,
+                        StringUtil::toCharacterString,
                         callKey("getUnicodeStream", s));
     }
 
@@ -616,8 +616,8 @@ public class StubResultSet implements ResultSet {
                                  return getRealResultSet().getBinaryStream(s);
                              }
                          },
-                        Util::recoverInputStream,
-                        Util::toCharacterString,
+                        StringUtil::recoverInputStream,
+                        StringUtil::toCharacterString,
                         callKey("getBinaryStream", s));
     }
 

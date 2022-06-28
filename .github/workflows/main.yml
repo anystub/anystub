@@ -71,7 +71,7 @@ jobs:
         run: |
           git config --global user.email "andreev.kirill.o@gmail.com" 
           git config --global user.name "AUTO-COMMIT" 
-          mvn -B release:prepare -DscmCommentPrefix="[skip ci]" -Darguments='-Dgpg.skip=false' org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=org.anystub:anystub
+          mvn -B release:prepare -DscmCommentPrefix="[skip ci]" -Darguments='-Dgpg.skip=false' org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=org.anystub:anystub  -Dsonar.exclusions=**/jdbc/*
 
       - name: Release with Maven
         if: ${{ github.ref == 'refs/heads/master' }}
@@ -82,4 +82,4 @@ jobs:
           SERVER_PASSWORD: ${{ secrets.MAVEN_CENTRAL_TOKEN }}
           MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
         run: |
-          mvn -B release:perform -Dmaven.deploy.skip=true -Darguments='-Dgpg.skip=false'
+          mvn -B release:perform -Dmaven.deploy.skip=true -Darguments='-Dgpg.skip=false' -Dsonar.exclusions=**/jdbc/*

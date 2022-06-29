@@ -36,7 +36,8 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>11</java.version>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
         <project.scm.id>github</project.scm.id>
         <gpg.skip>true</gpg.skip>
         <sonar.organization>anystub1</sonar.organization>
@@ -217,27 +218,4 @@
         </repository>
     </distributionManagement>
 
-    <profiles>
-        <profile>
-            <id>open-api</id>
-            <dependencies>
-                <dependency>
-                    <groupId>org.openapitools</groupId>
-                    <artifactId>jackson-databind-nullable</artifactId>
-                    <version>0.2.1</version>
-                </dependency>
-                <dependency>
-                    <groupId>io.swagger</groupId>
-                    <artifactId>swagger-annotations</artifactId>
-                    <version>1.6.3</version>
-                </dependency>
-
-                <dependency>
-                    <groupId>com.google.code.findbugs</groupId>
-                    <artifactId>jsr305</artifactId>
-                    <version>3.0.2</version>
-                </dependency>
-            </dependencies>
-        </profile>
-    </profiles>
 </project>

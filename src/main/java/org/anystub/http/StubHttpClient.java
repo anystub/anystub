@@ -159,8 +159,8 @@ public class StubHttpClient implements HttpClient {
     /**
      * wraps httpClient with a stub
      *
-     * @param httpClient
-     * @return
+     * @param httpClient a real httpclient to wrap with stub
+     * @return stubbed httpClient
      */
     public static StubHttpClient stub(HttpClient httpClient) {
         return new StubHttpClient(httpClient);

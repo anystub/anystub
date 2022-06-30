@@ -11,7 +11,7 @@ on:
     branches: [ master ]
 
   # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+#  workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -35,19 +35,14 @@ jobs:
           server-password: SERVER_PASSWORD
           gpg-private-key: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
           gpg-passphrase: MAVEN_GPG_PASSPHRASE
+          cache: 'maven'
 
       - name: Cache SonarCloud packages
-        uses: actions/cache@v1
+        uses: actions/cache@v3
         with:
           path: ~/.sonar/cache
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
-      - name: Cache Maven packages
-        uses: actions/cache@v1
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-m2
 
       - name: Build and analyze
         if: ${{ github.ref != 'refs/heads/master' }}
@@ -71,7 +66,6 @@ jobs:
         run: |
           git config --global user.email "andreev.kirill.o@gmail.com" 
           git config --global user.name "AUTO-COMMIT" 
-          cat /home/runner/.m2/settings.xml
           mvn -B release:prepare -DscmCommentPrefix="[skip ci]" -Darguments='-Dgpg.skip=false -Dgpg.passphrase=${MAVEN_GPG_PASSPHRASE}' org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=org.anystub:anystub  -Dsonar.exclusions=**/jdbc/*
 
       - name: Release with Maven

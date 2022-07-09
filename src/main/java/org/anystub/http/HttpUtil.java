@@ -38,6 +38,10 @@ import static java.util.Arrays.stream;
 import static org.anystub.HttpGlobalSettings.globalHeaders;
 import static org.anystub.StringUtil.escapeCharacterString;
 
+/**
+ * contains common functions to process HttpResponse, HttpRequest -
+ * convert to string, mask body
+ */
 public class HttpUtil {
 
     private static final Logger LOGGER = Logger.getLogger(HttpUtil.class.getName());
@@ -47,6 +51,11 @@ public class HttpUtil {
     private HttpUtil() {
     }
 
+    /**
+     * builds HttpResponse from strings
+     * @param iterable strings representation of HttpResponse
+     * @return recovered HttpResponse
+     */
     public static HttpResponse decode(Iterable<String> iterable) {
         BasicHttpResponse basicHttpResponse;
 
@@ -84,6 +93,11 @@ public class HttpUtil {
         return basicHttpResponse;
     }
 
+    /**
+     * converts HttpResponse to strings
+     * @param httpResponse response to convert
+     * @return string's representation to save in stub
+     */
     public static List<String> encode(HttpResponse httpResponse) {
         ArrayList<String> strings = new ArrayList<>();
         strings.add(httpResponse.getStatusLine().getProtocolVersion().toString());
@@ -109,6 +123,13 @@ public class HttpUtil {
     }
 
 
+    /**
+     * extracts request body, it guaranties that the request could be used in following procedures.
+     * if request body is a stream the data could be unavailable after reading for saving. so the function
+     * create a duplicate
+     * @param httpRequest request
+     * @return binary representation
+     */
     public static byte[] extractEntity(HttpRequest httpRequest) {
 
         if (httpRequest instanceof HttpEntityEnclosingRequest) {
@@ -124,6 +145,11 @@ public class HttpUtil {
         return null;
     }
 
+    /**
+     * converts data into string representation - could add text prefix to distinguish from headers
+     * @param entity entity to encode
+     * @return converted string
+     */
     public static Optional<String> extractEntity(HttpEntity entity) {
         byte[] bytes = extractEntityData(entity);
         if (bytes == null) {
@@ -137,6 +163,11 @@ public class HttpUtil {
         return Optional.of(entityText);
     }
 
+    /**
+     * extract data from stream-based entity
+     * @param entity
+     * @return binary representation
+     */
     public static byte[] extractEntityData(HttpEntity entity) {
         if (entity == null) {
             return null;
@@ -179,6 +210,12 @@ public class HttpUtil {
         return bytes;
     }
 
+    /**
+     * encodes a request into stub-key
+     * @param httpRequest request to build key
+     * @param httpHost host to build key
+     * @return string representation
+     */
     public static List<String> encode(HttpRequest httpRequest, HttpHost httpHost) {
         ArrayList<String> strings = new ArrayList<>();
 
@@ -200,10 +237,10 @@ public class HttpUtil {
             byte[] bytes = extractEntity(httpRequest);
             if (bytes != null) {
                 if (StringUtil.isText(bytes)) {
-                    String bodyText = maskBody(new String(bytes, StandardCharsets.UTF_8));
+                    String bodyText = SettingsUtil.maskBody(new String(bytes, StandardCharsets.UTF_8));
                     strings.add(escapeCharacterString(bodyText));
                 } else {
-                    // omit changes fot binary data
+                    // omit changes for binary data
                     // TODO: implement search substring for binary data
                     strings.add(StringUtil.toCharacterString(bytes));
                 }
@@ -213,10 +250,21 @@ public class HttpUtil {
         return strings;
     }
 
+    /**
+     * encodes a request into stub-key
+     * @param httpRequest request to build key
+     * @return string representation
+     */
     public static List<String> encode(HttpRequest httpRequest) {
         return encode(httpRequest, null);
     }
 
+    /**
+     * saves headers
+     * uses settings to collect required headers
+     * @param httpRequest request to extract headers
+     * @return string representation
+     */
     public static List<String> encodeHeaders(HttpRequest httpRequest) {
 
         boolean currentAllHeaders = HttpGlobalSettings.globalAllHeaders;
@@ -257,15 +305,21 @@ public class HttpUtil {
     }
 
 
+    /**
+     * checks if for given URL settings require to save request body
+     * @param url request to check against settings
+     * @return true if request bosy should be saved
+     */
     private static boolean matchBodyRule(String url) {
         return SettingsUtil.matchBodyRule(url);
     }
 
 
-    private static String maskBody(String s) {
-        return SettingsUtil.maskBody(s);
-    }
-
+    /**
+     * converts heaers into string representation
+     * @param h header to convert
+     * @return string representation
+     */
     public static String headerToString(Header h) {
         return String.format("%s: %s", h.getName(), h.getValue());
     }

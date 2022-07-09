@@ -3,7 +3,8 @@
 [![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=org.anystub:anystub&metric=alert_status)](https://sonarcloud.io/dashboard?id=org.anystub:anystub) 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.anystub/anystub/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.anystub/anystub)
 
-record input/output for tests in java. inspired by vcr for rails
+The library helps you automatically record and maintain http request/responses made with RestTemplate or 
+apache HttpClient 4.x
 
 Install from Maven Central 
 ===
@@ -12,7 +13,7 @@ Install from Maven Central
     <dependency>
       <groupId>org.anystub</groupId>
       <artifactId>anystub</artifactId>
-      <version>0.7.0</version>
+      <version>0.9.0</version>
       <scope>test</scope>
     </dependency>
 ```

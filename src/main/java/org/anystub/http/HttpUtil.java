@@ -267,13 +267,7 @@ public class HttpUtil {
      */
     public static List<String> encodeHeaders(HttpRequest httpRequest) {
 
-        boolean currentAllHeaders = HttpGlobalSettings.globalAllHeaders;
-
-        AnySettingsHttp settings = AnySettingsHttpExtractor.discoverSettings();
-
-        if (settings != null) {
-            currentAllHeaders = settings.allHeaders();
-        }
+        AnySettingsHttp settings = AnySettingsHttpExtractor.httpSettings();
 
         Header[] currentHeaders = httpRequest.getAllHeaders();
 
@@ -282,20 +276,14 @@ public class HttpUtil {
         Arrays.sort(currentHeaders, HttpUtil::compareHeaders);
 
 
-        if (currentAllHeaders) {
+        if (settings.allHeaders()) {
             return stream(currentHeaders)
                     .map(HttpUtil::headerToString)
                     .collect(Collectors.toList());
         }
 
 
-        Set<String> headersToAdd = new HashSet<>();
-        if (settings != null) {
-            headersToAdd.addAll(asList(settings.headers()));
-        }
-        if ((settings == null || !settings.overrideGlobal()) && globalHeaders != null) {
-            headersToAdd.addAll(asList(globalHeaders));
-        }
+        Set<String> headersToAdd = new HashSet<>(asList(settings.headers()));
 
         return stream(currentHeaders)
                 .filter(header -> headersToAdd.contains(header.getName()))

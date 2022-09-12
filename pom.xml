@@ -4,7 +4,7 @@
 
     <groupId>org.anystub</groupId>
     <artifactId>anystub</artifactId>
-    <version>0.9.1-SNAPSHOT</version>
+    <version>0.9.1</version>
     <packaging>jar</packaging>
 
     <name>anystub</name>
@@ -30,7 +30,7 @@
         <url>anystub-repo</url>
         <connection>scm:git:https://github.com/anystub/anystub.git</connection>
         <developerConnection>scm:git:https://github.com/anystub/anystub.git</developerConnection>
-      <tag>HEAD</tag>
+      <tag>anystub-0.9.1</tag>
     </scm>
 
     <properties>

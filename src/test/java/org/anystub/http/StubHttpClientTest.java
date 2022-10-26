@@ -4,7 +4,6 @@ import org.anystub.AnySettingsHttp;
 import org.anystub.AnyStubId;
 import org.anystub.Base;
 import org.anystub.RequestMode;
-import org.anystub.http.StubHttpClient;
 import org.anystub.mgmt.BaseManagerFactory;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
@@ -22,7 +21,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 class StubHttpClientTest {
@@ -144,7 +145,7 @@ class StubHttpClientTest {
 
     @Test
     @AnyStubId(filename = "executePostHttpSettingsTest")
-    @AnySettingsHttp(headers = {"HEADER", "HEADER3"})
+    @AnySettingsHttp(headers = {"HEADER", "HEADER3"}, bodyTrigger = "-")
     void testexecutePostHttpSettingsTest() throws IOException {
 
         HttpClient real = HttpClients.createDefault();
@@ -226,6 +227,7 @@ class StubHttpClientTest {
 
     @Test
     @AnyStubId(filename = "executePostMissingBodyTest")
+    @AnySettingsHttp(bodyTrigger = "-")
     void testexecutePostMissingBodyTest() throws IOException {
 
         StubHttpClient result = new StubHttpClient(null);

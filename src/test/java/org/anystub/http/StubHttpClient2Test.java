@@ -133,35 +133,6 @@ class StubHttpClient2Test {
     }
 
 
-//    static class Request1 {
-//        int code;
-//        String msg;
-//        LocalDate date;
-//
-//        public int getCode() {
-//            return code;
-//        }
-//
-//        public void setCode(int code) {
-//            this.code = code;
-//        }
-//
-//        public String getMsg() {
-//            return msg;
-//        }
-//
-//        public void setMsg(String msg) {
-//            this.msg = msg;
-//        }
-//
-//        public LocalDate getDate() {
-//            return date;
-//        }
-//
-//        public void setDate(LocalDate date) {
-//            this.date = date;
-//        }
-//    }
     @Test
     @AnyStubId(requestMode = RequestMode.rmAll)
     @AnySettingsHttp(headers = "Accept", bodyTrigger = "")
@@ -343,6 +314,7 @@ class StubHttpClient2Test {
 
     @RepeatedTest(3)
     @AnyStubId(requestMode = RequestMode.rmNew)
+    @AnySettingsHttp(bodyTrigger = "-")
     void testRMNewMode(WireMockRuntimeInfo wmRuntimeInfo) throws IOException {
         BaseManagerFactory.locate().clear();
         String filePath = BaseManagerFactory.locate().getFilePath();
@@ -441,5 +413,110 @@ class StubHttpClient2Test {
 
         verify(2,getRequestedFor(urlPathEqualTo("/")));
     }
+
+
+    @Test
+    @AnyStubId(requestMode = RequestMode.rmAll)
+    @AnySettingsHttp(bodyTrigger = {"-auth", "t"})
+    void testIncludeExcludeBody(WireMockRuntimeInfo wmRuntimeInfo) throws IOException {
+        // The static DSL will be automatically configured for you
+        stubFor(WireMock.post("/auth")
+                .willReturn(ok()
+                        .withHeader("Content-Type", MediaType.APPLICATION_OCTET_STREAM_VALUE)
+                        .withBody("ok")));
+        stubFor(WireMock.post("/test")
+                .willReturn(ok()
+                        .withHeader("Content-Type", MediaType.APPLICATION_OCTET_STREAM_VALUE)
+                        .withBody("ok")));
+
+
+
+        int port = wmRuntimeInfo.getHttpPort();
+        HttpPost httpPost = new HttpPost("http://localhost:"+port+"/auth");
+        httpPost.setHeader("Content-Type", MediaType.APPLICATION_OCTET_STREAM_VALUE);
+        httpPost.setHeader("Accept", "plain/text, */*");
+        httpPost.setEntity(new StringEntity("test"));
+
+        HttpResponse response1 = httpClient.execute(httpPost);
+        Assertions.assertEquals(200, response1.getStatusLine().getStatusCode());
+
+        httpPost = new HttpPost("http://localhost:"+port+"/test");
+        httpPost.setHeader("Content-Type", MediaType.APPLICATION_OCTET_STREAM_VALUE);
+        httpPost.setHeader("Accept", "plain/text, */*");
+        httpPost.setEntity(new StringEntity("test"));
+
+        response1 = httpClient.execute(httpPost);
+        Assertions.assertEquals(200, response1.getStatusLine().getStatusCode());
+
+
+        long times = BaseManagerFactory.locate()
+                .times();
+        Assertions.assertEquals(2, times);
+
+        Document document;
+        document = BaseManagerFactory.locate()
+                .history()
+                .findFirst()
+                .get();
+
+        Assertions.assertTrue(document.getKey(-1).startsWith("http://localhost:8080/auth"));
+        document = BaseManagerFactory.locate()
+                .history()
+                .skip(1)
+                .findFirst()
+                .get();
+        Assertions.assertTrue(document.getKey(-2).startsWith("http://localhost:8080/test"));
+        Assertions.assertTrue(document.getKey(-1).startsWith("test"));
+
+    }
+
+    @Test
+    @AnyStubId(requestMode = RequestMode.rmAll)
+    void testPostIncludesBody(WireMockRuntimeInfo wmRuntimeInfo) throws IOException {
+        // The static DSL will be automatically configured for you
+        stubFor(WireMock.post("/auth")
+                .willReturn(ok()
+                        .withHeader("Content-Type", MediaType.APPLICATION_OCTET_STREAM_VALUE)
+                        .withBody("ok")));
+
+        int port = wmRuntimeInfo.getHttpPort();
+        HttpPost httpPost = new HttpPost("http://localhost:"+port+"/auth");
+        httpPost.setHeader("Content-Type", MediaType.APPLICATION_OCTET_STREAM_VALUE);
+        httpPost.setHeader("Accept", "plain/text, */*");
+        httpPost.setEntity(new StringEntity("test"));
+
+        HttpResponse response1 = httpClient.execute(httpPost);
+        Assertions.assertEquals(200, response1.getStatusLine().getStatusCode());
+
+        long times = BaseManagerFactory.locate()
+                .times("POST", "HTTP/1.1", "http://localhost:8080/auth", "test");
+        Assertions.assertEquals(1, times);
+    }
+
+    @AnyStubId
+    @RepeatedTest(2)
+    void testPostSkipEmptyBody(WireMockRuntimeInfo wmRuntimeInfo) throws IOException {
+        // The static DSL will be automatically configured for you
+        stubFor(WireMock.post("/auth")
+                .willReturn(ok()
+                        .withHeader("Content-Type", MediaType.APPLICATION_OCTET_STREAM_VALUE)
+                        .withBody("ok")));
+
+        int port = wmRuntimeInfo.getHttpPort();
+        HttpPost httpPost = new HttpPost("http://localhost:"+port+"/auth");
+        httpPost.setHeader("Content-Type", MediaType.APPLICATION_OCTET_STREAM_VALUE);
+        httpPost.setHeader("Accept", "plain/text, */*");
+
+        HttpResponse response1 = httpClient.execute(httpPost);
+        Assertions.assertEquals(200, response1.getStatusLine().getStatusCode());
+
+        Document post = BaseManagerFactory.locate()
+                .match("POST", "HTTP/1.1", "http://localhost:8080/auth")
+                .reduce((a, b) -> b)
+                .get();
+        Assertions.assertEquals("http://localhost:8080/auth", post.getKey(-1));
+
+    }
+
 
 }

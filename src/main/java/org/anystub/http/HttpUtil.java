@@ -2,7 +2,6 @@ package org.anystub.http;
 
 import org.anystub.AnySettingsHttp;
 import org.anystub.AnySettingsHttpExtractor;
-import org.anystub.HttpGlobalSettings;
 import org.anystub.SettingsUtil;
 import org.anystub.StringUtil;
 import org.apache.http.Header;
@@ -35,7 +34,6 @@ import java.util.stream.Collectors;
 import static java.lang.Integer.parseInt;
 import static java.util.Arrays.asList;
 import static java.util.Arrays.stream;
-import static org.anystub.HttpGlobalSettings.globalHeaders;
 import static org.anystub.StringUtil.escapeCharacterString;
 
 /**
@@ -135,7 +133,11 @@ public class HttpUtil {
         if (httpRequest instanceof HttpEntityEnclosingRequest) {
             HttpEntityEnclosingRequest request = (HttpEntityEnclosingRequest) httpRequest;
             try {
-                BufferedHttpEntity bufferedHttpEntity = new BufferedHttpEntity(request.getEntity());
+                HttpEntity entity = request.getEntity();
+                if (entity == null) {
+                    return null;
+                }
+                BufferedHttpEntity bufferedHttpEntity = new BufferedHttpEntity(entity);
                 request.setEntity(bufferedHttpEntity);
                 return extractEntityData(bufferedHttpEntity);
             } catch (IOException e) {
@@ -219,7 +221,8 @@ public class HttpUtil {
     public static List<String> encode(HttpRequest httpRequest, HttpHost httpHost) {
         ArrayList<String> strings = new ArrayList<>();
 
-        strings.add(httpRequest.getRequestLine().getMethod());
+        String method = httpRequest.getRequestLine().getMethod();
+        strings.add(method);
         strings.add(httpRequest.getRequestLine().getProtocolVersion().toString());
 
         String fullUrl =
@@ -233,9 +236,9 @@ public class HttpUtil {
         strings.addAll(encodeHeaders(httpRequest));
         strings.add(fullUrl);
 
-        if (matchBodyRule(fullUrl)) {
+        if (SettingsUtil.matchBodyRule(method, fullUrl)) {
             byte[] bytes = extractEntity(httpRequest);
-            if (bytes != null) {
+            if (bytes != null && bytes.length > 0) {
                 if (StringUtil.isText(bytes)) {
                     String bodyText = SettingsUtil.maskBody(new String(bytes, StandardCharsets.UTF_8));
                     strings.add(escapeCharacterString(bodyText));
@@ -293,14 +296,7 @@ public class HttpUtil {
     }
 
 
-    /**
-     * checks if for given URL settings require to save request body
-     * @param url request to check against settings
-     * @return true if request bosy should be saved
-     */
-    private static boolean matchBodyRule(String url) {
-        return SettingsUtil.matchBodyRule(url);
-    }
+
 
 
     /**

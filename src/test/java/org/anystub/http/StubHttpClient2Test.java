@@ -493,7 +493,6 @@ class StubHttpClient2Test {
         Assertions.assertEquals(1, times);
     }
 
-    @Test
     @AnyStubId
     @RepeatedTest(2)
     void testPostSkipEmptyBody(WireMockRuntimeInfo wmRuntimeInfo) throws IOException {

@@ -1,9 +1,11 @@
-request0:
-  exception: []
-  keys: select * from dual
-  values: ['3', ID, INTEGER, '4', '10', '0', FIRST_NAME, VARCHAR, '12', '255', '0',
-    LAST_NAME, VARCHAR, '12', '255', '0', '3', Josh, Bloch, '4', Josh, Long]
-request1:
-  exception: []
-  keys: [resultSet, next]
-  values: 'true'
+exception: [null]
+keys: null
+values: []
+---
+exception: []
+keys: select * from dual
+values: '0'
+---
+exception: []
+keys: [resultSet, next]
+values: 'true'

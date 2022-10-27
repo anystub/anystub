@@ -1,12 +1,11 @@
-request0:
-  exception: []
-  keys: select * from dual
-  values: '0'
-request1:
-  exception: []
-  keys: [resultSet, next]
-  values: 'true'
-request2:
-  exception: []
-  keys: [resultSet, next, '#1']
-  values: 'false'
+exception: []
+keys: select * from dual
+values: '0'
+---
+exception: []
+keys: [resultSet, next]
+values: 'true'
+---
+exception: []
+keys: [resultSet, next, '#1']
+values: 'false'

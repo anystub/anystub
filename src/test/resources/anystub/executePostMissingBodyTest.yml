@@ -1,17 +1,16 @@
-request0:
-  exception: []
-  keys: [POST, HTTP/1.1, 'https://gturnquist-quoters.cfapps.io:443/api/ran928374-long-url']
-  values: [HTTP/1.1, '200', '', 'Date: Tue, 26 May 2020 16:33:22 GMT', 'Content-Type:
-      application/json;charset=UTF-8', 'Transfer-Encoding: chunked', 'Connection:
-      keep-alive', 'Transaction-ID: f00ee744-19bd-41ef-8785-3127af44bf45', 'Transaction-ID:
-      f00ee744-19bd-41ef-8785-3127af44bf45', 'Set-Cookie: WPP_AUTH_TOKEN=; Max-Age=0;
-      Expires=Thu, 01-Jan-1970 00:00:10 GMT; Domain=localhost; Path=/', 'Set-Cookie:
-      WPP_AUTH_TOKEN=eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1OTA1MTA4MDIsImV4cCI6MTU5MDUyMTYwMiwibWF4YWdlIjoiMTA4MDAiLCJpc3MiOiIzNjc3YWQwZi03YzJmLTQwZjItOGNiYS03N2E1YzUzODFlYzkiLCJzeXNpZCI6IjM2NzdhZDBmLTdjMmYtNDBmMi04Y2JhLTc3YTVjNTM4MWVjOSJ9.HjmJRATU2vmPcNyaBqQ-NhbhE-nIi2FizkkuhZ_FkGs;
-      Domain=localhost; Path=/', 'X-Content-Type-Options: nosniff', 'X-XSS-Protection:
-      1; mode=block', 'Cache-Control: no-cache, no-store, max-age=0, must-revalidate',
-           'Pragma: no-cache', 'Expires: 0', 'X-Frame-Options: DENY', '{"locale":"en-US","report":[{"type":"INFO","created":"2020-05-26T16:33:22.426Z","message":"Request
-      ''/name/parse'' with body: File(file=AOGL976_en-US.zip)"},{"type":"INFO","created":"2020-05-26T16:33:22.426Z","message":"Filename
-      end with: ''.zip'' - is package."},{"type":"INFO","created":"2020-05-26T16:33:22.426Z","message":"Success
-      found ''AOGL976'' code value."},{"type":"INFO","created":"2020-05-26T16:33:22.426Z","message":"Success
-      found ''en-US'' locale value."},{"type":"INFO","created":"2020-05-26T16:33:22.427Z","message":"Success
-      associating code ''AOGL976'' with ''Session'' package type."}],"type":"Session","code":"AOGL976"}']
+exception: []
+keys: [POST, HTTP/1.1, 'https://gturnquist-quoters.cfapps.io:443/api/ran928374-long-url']
+values: [HTTP/1.1, '200', '', 'Date: Tue, 26 May 2020 16:33:22 GMT', 'Content-Type:
+    application/json;charset=UTF-8', 'Transfer-Encoding: chunked', 'Connection:
+    keep-alive', 'Transaction-ID: f00ee744-19bd-41ef-8785-3127af44bf45', 'Transaction-ID:
+    f00ee744-19bd-41ef-8785-3127af44bf45', 'Set-Cookie: WPP_AUTH_TOKEN=; Max-Age=0;
+    Expires=Thu, 01-Jan-1970 00:00:10 GMT; Domain=localhost; Path=/', 'Set-Cookie:
+    WPP_AUTH_TOKEN=eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1OTA1MTA4MDIsImV4cCI6MTU5MDUyMTYwMiwibWF4YWdlIjoiMTA4MDAiLCJpc3MiOiIzNjc3YWQwZi03YzJmLTQwZjItOGNiYS03N2E1YzUzODFlYzkiLCJzeXNpZCI6IjM2NzdhZDBmLTdjMmYtNDBmMi04Y2JhLTc3YTVjNTM4MWVjOSJ9.HjmJRATU2vmPcNyaBqQ-NhbhE-nIi2FizkkuhZ_FkGs;
+    Domain=localhost; Path=/', 'X-Content-Type-Options: nosniff', 'X-XSS-Protection:
+    1; mode=block', 'Cache-Control: no-cache, no-store, max-age=0, must-revalidate',
+         'Pragma: no-cache', 'Expires: 0', 'X-Frame-Options: DENY', '{"locale":"en-US","report":[{"type":"INFO","created":"2020-05-26T16:33:22.426Z","message":"Request
+    ''/name/parse'' with body: File(file=AOGL976_en-US.zip)"},{"type":"INFO","created":"2020-05-26T16:33:22.426Z","message":"Filename
+    end with: ''.zip'' - is package."},{"type":"INFO","created":"2020-05-26T16:33:22.426Z","message":"Success
+    found ''AOGL976'' code value."},{"type":"INFO","created":"2020-05-26T16:33:22.426Z","message":"Success
+    found ''en-US'' locale value."},{"type":"INFO","created":"2020-05-26T16:33:22.427Z","message":"Success
+    associating code ''AOGL976'' with ''Session'' package type."}],"type":"Session","code":"AOGL976"}']

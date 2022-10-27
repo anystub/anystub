@@ -1,4 +1,3 @@
-request0:
-  exception: []
-  keys: DROP TABLE testcasefile IF EXISTS
-  values: 'false'
+exception: []
+keys: DROP TABLE testcasefile IF EXISTS
+values: 'false'

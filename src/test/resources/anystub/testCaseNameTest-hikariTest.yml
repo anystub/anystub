@@ -1,12 +1,11 @@
-request0:
-  exception: []
-  keys: DROP TABLE testcasename IF EXISTS
-  values: 'false'
-request1:
-  exception: []
-  keys: DROP TABLE testcasename IF EXISTS
-  values: 'false'
-request2:
-  exception: []
-  keys: DROP TABLE testcasename IF EXISTS
-  values: 'false'
+exception: []
+keys: DROP TABLE testcasename IF EXISTS
+values: 'false'
+---
+exception: []
+keys: DROP TABLE testcasename IF EXISTS
+values: 'false'
+---
+exception: []
+keys: DROP TABLE testcasename IF EXISTS
+values: 'false'

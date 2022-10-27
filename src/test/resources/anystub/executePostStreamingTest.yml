@@ -1,25 +1,24 @@
-request0:
-  exception: []
-  keys: [POST, HTTP/1.1, 'https://gturnquist-quoters.cfapps.io:443/api/randomX-stream',
-    very-string]
-  values: [HTTP/1.1, '405', Method Not Allowed, 'Allow: GET', 'Content-Type: application/json;charset=UTF-8',
-    'Date: Thu, 28 Nov 2019 23:54:28 GMT', 'X-Vcap-Request-Id: a3b10986-d43a-4898-6017-2022214a6c21',
-    'Content-Length: 163', 'Connection: keep-alive', '{"timestamp":"2019-11-28T23:54:28.582+0000","status":405,"error":"Method
-      Not Allowed","message":"Request method ''POST'' not supported","path":"/api/randomX-stream"}']
-request1:
-  exception: []
-  keys: [POST, HTTP/1.1, 'https://gturnquist-quoters.cfapps.io:443/api/randomX-stream',
-    '...v...e...r...y...-...s...t...r...i...n...g...']
-  values:
-  - HTTP/1.1
-  - '404'
-  - Not Found
-  - 'Cache-Control: no-cache, no-store'
-  - 'Content-Type: text/plain; charset=utf-8'
-  - 'Date: Sat, 25 Jun 2022 21:29:10 GMT'
-  - 'X-Cf-Routererror: unknown_route'
-  - 'X-Content-Type-Options: nosniff'
-  - 'Content-Length: 80'
-  - 'Connection: keep-alive'
-  - |
-    404 Not Found: Requested route ('gturnquist-quoters.cfapps.io') does not exist.
+exception: []
+keys: [POST, HTTP/1.1, 'https://gturnquist-quoters.cfapps.io:443/api/randomX-stream',
+  very-string]
+values: [HTTP/1.1, '405', Method Not Allowed, 'Allow: GET', 'Content-Type: application/json;charset=UTF-8',
+  'Date: Thu, 28 Nov 2019 23:54:28 GMT', 'X-Vcap-Request-Id: a3b10986-d43a-4898-6017-2022214a6c21',
+  'Content-Length: 163', 'Connection: keep-alive', '{"timestamp":"2019-11-28T23:54:28.582+0000","status":405,"error":"Method
+    Not Allowed","message":"Request method ''POST'' not supported","path":"/api/randomX-stream"}']
+---
+exception: []
+keys: [POST, HTTP/1.1, 'https://gturnquist-quoters.cfapps.io:443/api/randomX-stream',
+  '...v...e...r...y...-...s...t...r...i...n...g...']
+values:
+- HTTP/1.1
+- '404'
+- Not Found
+- 'Cache-Control: no-cache, no-store'
+- 'Content-Type: text/plain; charset=utf-8'
+- 'Date: Sat, 25 Jun 2022 21:29:10 GMT'
+- 'X-Cf-Routererror: unknown_route'
+- 'X-Content-Type-Options: nosniff'
+- 'Content-Length: 80'
+- 'Connection: keep-alive'
+- |
+  404 Not Found: Requested route ('gturnquist-quoters.cfapps.io') does not exist.

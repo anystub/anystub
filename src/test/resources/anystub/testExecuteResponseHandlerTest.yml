@@ -1,7 +1,6 @@
-request0:
-  exception: []
-  keys: [GET, HTTP/1.1, 'https://gturnquist-quoters.cfapps.io:443/api/random']
-  values: [HTTP/1.1, '200', OK, 'Content-Type: application/json;charset=UTF-8', 'Date:
-      Sun, 21 Apr 2019 12:34:33 GMT', 'X-Vcap-Request-Id: 99b6682d-ee64-4f10-47eb-f16700a22661',
-    'Content-Length: 109', 'Connection: keep-alive', '{"type":"success","value":{"id":10,"quote":"Really
-      loving Spring Boot, makes stand alone Spring apps easy."}}']
+exception: []
+keys: [GET, HTTP/1.1, 'https://gturnquist-quoters.cfapps.io:443/api/random']
+values: [HTTP/1.1, '200', OK, 'Content-Type: application/json;charset=UTF-8', 'Date:
+    Sun, 21 Apr 2019 12:34:33 GMT', 'X-Vcap-Request-Id: 99b6682d-ee64-4f10-47eb-f16700a22661',
+  'Content-Length: 109', 'Connection: keep-alive', '{"type":"success","value":{"id":10,"quote":"Really
+    loving Spring Boot, makes stand alone Spring apps easy."}}']

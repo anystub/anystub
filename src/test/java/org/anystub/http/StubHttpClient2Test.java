@@ -221,8 +221,8 @@ class StubHttpClient2Test {
 
 
     @Test
-    @AnyStubId(requestMode = RequestMode.rmAll)
-    @AnySettingsHttp(bodyTrigger = "", bodyMask = {"secret", "password", "....-.*\\.\\d{2,10}", "\\d{4}-\\d{1,2}-\\d{1,2}"})
+    @AnyStubId(requestMode = RequestMode.rmAll, requestMasks = {"secret", "password", "....-.*\\.\\d{2,10}", "\\d{4}-\\d{1,2}-\\d{1,2}"})
+    @AnySettingsHttp(bodyTrigger = "")
     void testMaskRequest(WireMockRuntimeInfo wmRuntimeInfo) throws IOException {
         // The static DSL will be automatically configured for you
         stubFor(WireMock.post("/")

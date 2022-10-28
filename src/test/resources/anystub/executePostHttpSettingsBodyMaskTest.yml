@@ -5,3 +5,20 @@ values: [HTTP/1.1, '405', Method Not Allowed, 'Allow: GET', 'Content-Type: appli
   'Date: Sun, 01 Dec 2019 00:52:02 GMT', 'X-Vcap-Request-Id: 2b54a7a8-fe11-459f-6792-b16bf12dbb17',
   'Content-Length: 167', 'Connection: keep-alive', '{"timestamp":"2019-12-01T00:52:02.220+0000","status":405,"error":"Method
     Not Allowed","message":"Request method ''POST'' not supported","path":"/api/ran928374-long-url"}']
+---
+exception: []
+keys: [POST, HTTP/1.1, 'https://gturnquist-quoters.cfapps.io:443/api/ran928374-long-url',
+  'test 222 test 111 01-12-19 12:15 eom']
+values:
+- HTTP/1.1
+- '404'
+- Not Found
+- 'Cache-Control: no-cache, no-store'
+- 'Content-Type: text/plain; charset=utf-8'
+- 'Date: Thu, 27 Oct 2022 16:59:00 GMT'
+- 'X-Cf-Routererror: unknown_route'
+- 'X-Content-Type-Options: nosniff'
+- 'Content-Length: 80'
+- 'Connection: keep-alive'
+- |
+  404 Not Found: Requested route ('gturnquist-quoters.cfapps.io') does not exist.

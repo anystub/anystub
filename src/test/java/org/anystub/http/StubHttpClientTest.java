@@ -201,8 +201,8 @@ class StubHttpClientTest {
     }
 
     @Test
-    @AnyStubId(filename = "executePostHttpSettingsBodyMaskTest")
-    @AnySettingsHttp(bodyTrigger = "ran928374", bodyMask = {"111", "222", "\\d\\d-\\d\\d-\\d\\d", "\\d\\d:\\d\\d"})
+    @AnyStubId(filename = "executePostHttpSettingsBodyMaskTest", requestMasks = {"111", "222", "\\d\\d-\\d\\d-\\d\\d", "\\d\\d:\\d\\d"})
+    @AnySettingsHttp(bodyTrigger = "ran928374")
     void testexecutePostHttpSettingsBodyMaskTest() throws IOException {
 
         HttpClient real = HttpClients.createDefault();

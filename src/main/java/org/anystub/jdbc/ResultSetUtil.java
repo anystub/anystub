@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.anystub.ObjectMapperFactory;
 import org.h2.tools.SimpleResultSet;
 
-import java.sql.Blob;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,6 +21,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Function;
 import java.util.logging.Logger;
 
 import static java.sql.Types.BIGINT;
@@ -49,9 +51,18 @@ import static java.sql.Types.VARCHAR;
 public class ResultSetUtil {
 
     private static final Logger LOGGER = Logger.getLogger("ResultSetUtil");
+    private static final ConcurrentHashMap<String, Function<String, ? extends Object>> adapters= new ConcurrentHashMap<>();
 
     private ResultSetUtil() {
 
+    }
+
+    public static void registerTypeAdapter(String typeName, Function<String, ? extends Object> adapter) {
+        adapters.put(typeName, adapter);
+    }
+
+    public static void enableMsSql() {
+        registerTypeAdapter("uniqueidentifier", UUID::fromString);
     }
 
     public static List<String> encodeHeader(ResultSetMetaData metaData) throws SQLException {
@@ -123,6 +134,7 @@ public class ResultSetUtil {
         // * keeps column numbers, to double values
         final Set<Integer> doubleColumnIndexes = new HashSet<>();
         final List<Integer> decodedValueTypes = new ArrayList<>();
+        final List<String> decodedValueTypeNames = new ArrayList<>();
 
         Iterator<String> it = values.iterator();
         if (it.hasNext()) {
@@ -135,6 +147,7 @@ public class ResultSetUtil {
                 int cScale = Integer.parseInt(it.next());
 
                 decodedValueTypes.add(cType);
+                decodedValueTypeNames.add(cTypeName);
                 String[] split = cNameLabel.split("/");
 
                 if (split.length == 2 && split[0] != null && !split[0].equalsIgnoreCase(split[1])) {
@@ -149,8 +162,15 @@ public class ResultSetUtil {
                 ArrayList<Object> row = new ArrayList<>();
                 for (int i = 0; i < columnCount; i++) {
                     String next = it.next();
-                    Object item;
-                    item = decodeValue(next, decodedValueTypes.get(i));
+                    Object item = null;
+                    Function<String, ?> stringFunction = adapters.get(decodedValueTypeNames.get(i));
+                    if (stringFunction != null) {
+                        item = stringFunction.apply(next);
+                    }
+                    if (item == null) {
+                        item = decodeValue(next, decodedValueTypes.get(i));
+                    }
+
                     row.add(item);
                     if (doubleColumnIndexes.contains(i)) {
                         row.add(item);
@@ -270,7 +290,8 @@ public class ResultSetUtil {
                 return decodeValue(next, Time.class, Time.valueOf(LocalTime.MIN));
             case TIMESTAMP:
                 return decodeValue(next, Timestamp.class, Timestamp.valueOf(LocalDateTime.MIN));
-//            case  BINARY = -2;
+//            case  BINARY:// = -2;
+//                return decodeValue(next, UUID.class, UUID.fromString("00000000-0000-0000-0000-000000000000"));
 //            case  VARBINARY = -3;
 //            case  LONGVARBINARY = -4;
 //            case  NULL = 0;

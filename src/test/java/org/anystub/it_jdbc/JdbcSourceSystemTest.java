@@ -453,5 +453,24 @@ public class JdbcSourceSystemTest {
 
     }
 
+    @Test
+    @AnyStubId(requestMode = RequestMode.rmAll)
+    void testUUIDColumn() {
+        jdbcTemplate.execute("DROP TABLE UUIDTABLE IF EXISTS");
+        String sql = "create table UUIDTABLE(id int primary key, data uuid default 'dbfe22f6-3d1c-4a35-9b52-2ee8ce3c424f')";
+        jdbcTemplate.execute(sql);
+
+        jdbcTemplate.execute("insert into UUIDTABLE(id) values(1);");
+
+        List<String> data = jdbcTemplate.query("select * from UUIDTABLE", new Object[]{},
+                (resultSet, i) -> String.format("%d %s",
+                        resultSet.getInt("ID"),
+                        resultSet.getObject("DATA", UUID.class)
+                        ));
+
+        assertEquals(1, data.size());
+        assertEquals("1 \"dbfe22f6-3d1c-4a35-9b52-2ee8ce3c424f\"", data.get(0));
+
+    }
 
 }

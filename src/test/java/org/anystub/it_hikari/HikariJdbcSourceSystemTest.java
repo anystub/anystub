@@ -93,9 +93,7 @@ public class HikariJdbcSourceSystemTest {
         jdbcTemplate.execute("DROP TABLE testcasename IF EXISTS");
         jdbcTemplate.execute("DROP TABLE testcasename IF EXISTS");
 
-        assertEquals(3, BaseManagerFactory
-                .getBaseManager()
-                .getBase("testCaseNameTest-hikariTest.yml").times());
+        assertEquals(3, BaseManagerFactory.locate().times());
         assertTrue("no exceptions expected", true);
     }
 

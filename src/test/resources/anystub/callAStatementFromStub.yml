@@ -1,7 +1,3 @@
-exception: [null]
-keys: null
-values: []
----
 exception: []
 keys: select * from dual
 values: '0'

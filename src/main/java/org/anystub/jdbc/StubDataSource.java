@@ -6,6 +6,7 @@ import org.anystub.Base;
 import org.anystub.mgmt.BaseManagerFactory;
 
 import javax.sql.DataSource;
+import java.io.File;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -17,7 +18,6 @@ public class StubDataSource implements DataSource {
     private final Logger log = Logger.getLogger("StubDataSource");
     private final DataSource realDataSource;
     private Base base = null;
-    private String stubSuffix = null;
     private boolean isStubResultSetMode = false;
 
     public StubDataSource(DataSource realDataSource) {
@@ -83,19 +83,7 @@ public class StubDataSource implements DataSource {
      * @return stub file
      */
     public Base getBase() {
-
-        AnyStubId s = AnyStubFileLocator.discoverFile(stubSuffix);
-        if (s != null) {
-            return BaseManagerFactory
-                    .getBaseManager()
-                    .getBase(s.filename())
-                    .constrain(s.requestMode());
-        }
-        if (base != null) {
-            return base;
-        }
-        return BaseManagerFactory.getBaseManager().getBase();
-
+        return BaseManagerFactory.locate();
     }
 
     public DataSource getRealDataSource() {
@@ -107,8 +95,8 @@ public class StubDataSource implements DataSource {
         return this;
     }
 
+    @Deprecated
     public StubDataSource setStubSuffix(String s) {
-        this.stubSuffix = s;
         return this;
     }
 

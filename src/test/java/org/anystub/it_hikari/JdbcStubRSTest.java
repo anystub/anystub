@@ -74,7 +74,7 @@ public class JdbcStubRSTest {
             assertEquals("Bloch", query.get(0).last_name);
             assertEquals("Long", query.get(1).last_name);
 
-        Base base = BaseManagerFactory.getStub("hikariTest");
+        Base base = BaseManagerFactory.locate();
         assertTrue(base.timesEx("SELECT.*") >= 2);
     }
 

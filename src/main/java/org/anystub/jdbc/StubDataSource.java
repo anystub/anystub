@@ -1,12 +1,9 @@
 package org.anystub.jdbc;
 
-import org.anystub.AnyStubFileLocator;
-import org.anystub.AnyStubId;
 import org.anystub.Base;
 import org.anystub.mgmt.BaseManagerFactory;
 
 import javax.sql.DataSource;
-import java.io.File;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;

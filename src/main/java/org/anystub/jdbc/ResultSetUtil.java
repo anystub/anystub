@@ -62,7 +62,8 @@ public class ResultSetUtil {
     }
 
     public static void enableMsSql() {
-        registerTypeAdapter("uniqueidentifier", UUID::fromString);
+        registerTypeAdapter("uniqueidentifier", next ->
+                next == null || next.isEmpty() ? null : UUID.fromString(next));
     }
 
     public static List<String> encodeHeader(ResultSetMetaData metaData) throws SQLException {

@@ -36,7 +36,6 @@ public class DefaultConfiguration {
 
         DataSource stubDataSource = new StubDataSource(ds)
                 .setFallbackBase(base)
-                .setStubSuffix("hikariTest")
                 .setStubResultSetMode(true);
         return stubDataSource;
     }

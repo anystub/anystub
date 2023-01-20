@@ -1,11 +1,11 @@
 exception: []
 keys: [POST, HTTP/1.1, 'http://localhost:8080/auth']
 values: [HTTP/1.1, '200', OK, 'Content-Type: application/octet-stream', 'Matched-Stub-Id:
-    08f4ed58-5ec1-4150-83a6-d99d6cfdd831', 'Vary: Accept-Encoding, User-Agent', 'Transfer-Encoding:
+    82bb9aa0-e2a4-4646-8a2b-40a8079b40ab', 'Vary: Accept-Encoding, User-Agent', 'Transfer-Encoding:
     chunked', ok]
 ---
 exception: []
 keys: [POST, HTTP/1.1, 'http://localhost:8080/test', test]
 values: [HTTP/1.1, '200', OK, 'Content-Type: application/octet-stream', 'Matched-Stub-Id:
-    f5f56464-8787-4d87-a06e-c0fdb3465de8', 'Vary: Accept-Encoding, User-Agent', 'Transfer-Encoding:
+    66fad6ad-b396-441d-8d47-a280c5ec6307', 'Vary: Accept-Encoding, User-Agent', 'Transfer-Encoding:
     chunked', ok]

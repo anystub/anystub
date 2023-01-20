@@ -1,5 +1,5 @@
 exception: []
 keys: [POST, HTTP/1.1, 'http://localhost:8080/auth', test]
 values: [HTTP/1.1, '200', OK, 'Content-Type: application/octet-stream', 'Matched-Stub-Id:
-    97d78090-0710-47c7-abb5-f11e537543d6', 'Vary: Accept-Encoding, User-Agent', 'Transfer-Encoding:
+    fb87048f-50a4-4cc7-b4d5-8398878746fa', 'Vary: Accept-Encoding, User-Agent', 'Transfer-Encoding:
     chunked', ok]

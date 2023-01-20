@@ -83,7 +83,7 @@ public class JdbcSourceSystemTest {
     }
 
     @Test
-    @AnyStubId(filename = "selectwithaliasTest")
+    @AnyStubId(filename = "selectwithaliasTest", requestMode = RequestMode.rmAll)
     public void testSelectwithalias() {
 
         for (int i=0; i<2; i++) {

@@ -3,6 +3,8 @@ package org.anystub.jdbc;
 import org.anystub.Base;
 import org.anystub.Supplier;
 import org.anystub.SupplierCached;
+import org.h2.value.Value;
+import org.h2.value.ValueToObjectConverter;
 
 import java.io.InputStream;
 import java.io.Reader;
@@ -25,10 +27,12 @@ import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Base64;
 import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static java.util.Arrays.asList;
 
@@ -284,7 +288,8 @@ public class StubPreparedStatement extends StubStatement implements PreparedStat
     public void setObject(int parameterIndex, Object o, int targetSqlType) throws SQLException {
         // todo: if the object overrides hashcode - put it here
         // https://stackoverflow.com/questions/22031489/how-to-check-if-a-class-has-overridden-equals-and-hashcode
-        addCallKeys("setObject", String.valueOf(parameterIndex), String.valueOf(targetSqlType));
+
+        addCallKeys(object2keys(o));
 
         stubConnection.add(() -> {
             getRealStatement().setObject(parameterIndex, o, targetSqlType);
@@ -293,11 +298,45 @@ public class StubPreparedStatement extends StubStatement implements PreparedStat
 
     @Override
     public void setObject(int parameterIndex, Object o) throws SQLException {
-        addCallKeys("setObject", String.valueOf(parameterIndex));
+
+        addCallKeys(object2keys(o));
 
         stubConnection.add(() -> {
             getRealStatement().setObject(parameterIndex, o);
         });
+    }
+
+    private String[] object2keys(Object o) {
+        if (o instanceof Value) {
+            return new String[] {((Value) o).getString()};
+        } else if (o instanceof String) {
+            return new String[]{(String) o};
+        } else if (o != null && o.getClass().isArray()) {
+            return Arrays.stream((Object[])o)
+                    .map(t-> object2keys(t))
+                    .collect(Collectors.toList())
+                    .toArray(new String[0]);
+
+        } else if (o!=null && o instanceof Array) {
+            try {
+                Object [] x = (Object[]) ((Array) o).getArray();
+                return Arrays.stream(x)
+                        .map(t-> object2keys(t))
+                        .collect(Collectors.toList())
+                        .toArray(new String[0]);
+            } catch (SQLException e) {
+                return new String[0];
+            }
+        } else if (o instanceof ResultSet) {
+            return ResultSetUtil.encode((ResultSet) o)
+                    .toArray(new String[0]);
+        }
+
+        Value value = ValueToObjectConverter.objectToValue(null, o, -1);
+        if (value==null) {
+            return new String[0];
+        }
+        return new String[]{value.getString()};
     }
 
     @Override
@@ -505,7 +544,7 @@ public class StubPreparedStatement extends StubStatement implements PreparedStat
 
     @Override
     public void setObject(int parameterIndex, Object o, int targetSqlType, int scaleOrLength) throws SQLException {
-        addCallKeys("setObject", String.valueOf(parameterIndex), String.valueOf(targetSqlType), String.valueOf(scaleOrLength));
+        addCallKeys(object2keys(o));
 
         stubConnection.add(() -> {
             getRealStatement().setObject(parameterIndex, 0, targetSqlType, scaleOrLength);

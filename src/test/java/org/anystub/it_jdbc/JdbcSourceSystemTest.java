@@ -26,6 +26,7 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import static java.sql.Types.VARCHAR;
+import static org.anystub.mgmt.BaseManagerFactory.locate;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -50,8 +51,6 @@ public class JdbcSourceSystemTest {
     @AnyStubId(filename = "jdbcStub4testSome", requestMode = RequestMode.rmNone)
     public void testSome() {
 
-
-        log.info("Creating tables");
 
         jdbcTemplate.execute("DROP TABLE customers IF EXISTS");
         jdbcTemplate.execute("CREATE TABLE customers(" +
@@ -473,4 +472,24 @@ public class JdbcSourceSystemTest {
 
     }
 
+    @Test
+    @AnyStubId
+    void testObjectParameterSaved() {
+        jdbcTemplate.execute("DROP TABLE customers IF EXISTS");
+        jdbcTemplate.execute("CREATE TABLE customers(" +
+                "id SERIAL, first_name VARCHAR(255), last_name VARCHAR(255))");
+
+
+        List<Customer> query = jdbcTemplate.query(
+                "select * from customers where first_name = ?", new Object[]{UUID.fromString("702c917c-17a5-4635-93f2-a1d38672b612")},
+
+                (rs, rowNum) -> new Customer(rs.getLong("id"), rs.getString("first_name"), rs.getString("last_name"))
+        );
+
+        assertEquals(0, query.size());
+
+        String key = locate().match().collect(Collectors.toList()).get(2).getKey(1);
+        assertEquals("702c917c-17a5-4635-93f2-a1d38672b612", key);
+
+    }
 }

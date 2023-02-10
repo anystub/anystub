@@ -1,0 +1,12 @@
+exception: []
+keys: DROP TABLE customers IF EXISTS
+values: 'false'
+---
+exception: []
+keys: CREATE TABLE customers(id SERIAL, first_name VARCHAR(255), last_name VARCHAR(255))
+values: 'false'
+---
+exception: []
+keys: ['select * from customers where first_name = ?', 702c917c-17a5-4635-93f2-a1d38672b612]
+values: ['3', ID, INTEGER, '4', '32', '0', FIRST_NAME, CHARACTER VARYING, '12', '255',
+  '0', LAST_NAME, CHARACTER VARYING, '12', '255', '0']

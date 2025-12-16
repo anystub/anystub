@@ -311,13 +311,10 @@
                         <artifactId>maven-javadoc-plugin</artifactId>
                     </plugin>
 
-                    <!-- GPG Plugin - skip for parent POM -->
+                    <!-- GPG Plugin - controlled by gpg.skip property via pluginManagement -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <configuration>
-                            <skip>true</skip>
-                        </configuration>
                     </plugin>
 
                     <!-- Deploy Plugin (use central-publishing instead) -->

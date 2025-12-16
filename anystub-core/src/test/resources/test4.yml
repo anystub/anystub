@@ -1,0 +1,21 @@
+allHeaders: true
+headers:
+  - headers
+  - headers
+  - headers
+  - headers
+bodyTrigger:
+  - http
+  - http2
+  - http
+  - http2
+  - http
+  - http2
+bodyMask:
+  - "password: .{2,10}\\,"
+  - test
+  - test2
+  - test4
+  - "password: .{2,10}\\,"
+  - test
+  - test2

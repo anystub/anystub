@@ -1,0 +1,39 @@
+exception: []
+keys: DROP TABLE SOMETYPES IF EXISTS
+values: 'false'
+---
+exception: []
+keys: "CREATE TABLE SOMETYPES(\nID BIGINT PRIMARY KEY AUTO_INCREMENT,\nNAME INT NOT\
+  \ NULL,\nC_BIGINT BIGINT, \nC_SMALLINT SMALLINT, \nC_BOOL BOOL, \nC_DECIMAL DECIMAL,\
+  \ \nC_DOUBLE DOUBLE, \nC_TIME TIME, \nC_DATE DATE, \nC_TIMESTAMP TIMESTAMP \n);"
+values: 'false'
+---
+exception: []
+keys: ['insert into SOMETYPES (NAME, C_BIGINT,C_SMALLINT,C_BOOL,C_DECIMAL,C_DOUBLE,C_TIME,C_DATE,C_TIMESTAMP)
+    values (?, ?,?, ?,?, ?,?, ?,?)', '1', '1', '2', '2147483648', '3', '126', '4',
+  'true', '5', '14.0', '6', '43.124', '7', '17:23:54', '8', '2019-04-22', '9', '1970-01-15
+    08:09:45.345']
+values: '1'
+---
+exception: []
+keys: ['insert into SOMETYPES (NAME, C_BIGINT,C_SMALLINT,C_BOOL,C_DECIMAL,C_DOUBLE,C_TIME,C_DATE,C_TIMESTAMP)
+    values (?, ?,?, ?,?, ?,?, ?,?)', getGeneratedKeys]
+values: '0'
+---
+exception: []
+keys: ['select * from SOMETYPES where id =?', '1']
+values: ['10', ID, BIGINT, '-5', '64', '0', NAME, INTEGER, '4', '32', '0', C_BIGINT,
+  BIGINT, '-5', '64', '0', C_SMALLINT, SMALLINT, '5', '16', '0', C_BOOL, BOOLEAN,
+  '16', '1', '0', C_DECIMAL, DECIMAL, '3', '100000', '0', C_DOUBLE, DOUBLE PRECISION,
+  '8', '53', '0', C_TIME, TIME, '92', '8', '0', C_DATE, DATE, '91', '10', '0', C_TIMESTAMP,
+  TIMESTAMP, '93', '26', '6', '1', '1', '2147483648', '126', 'true', '14', '43.124',
+  '"17:23:54"', '1555887600000', '1235385345']
+---
+exception: []
+keys: ['select * from SOMETYPES where id =?', '1']
+values: ['10', ID, BIGINT, '-5', '64', '0', NAME, INTEGER, '4', '32', '0', C_BIGINT,
+  BIGINT, '-5', '64', '0', C_SMALLINT, SMALLINT, '5', '16', '0', C_BOOL, BOOLEAN,
+  '16', '1', '0', C_DECIMAL, DECIMAL, '3', '100000', '0', C_DOUBLE, DOUBLE PRECISION,
+  '8', '53', '0', C_TIME, TIME, '92', '8', '0', C_DATE, DATE, '91', '10', '0', C_TIMESTAMP,
+  TIMESTAMP, '93', '26', '6', '1', '1', '2147483648', '126', 'true', '14', '43.124',
+  '"17:23:54"', '1555887600000', '1235385345']

@@ -1,0 +1,17 @@
+exception: []
+keys: DROP ALIAS SP_HELLO if Exists
+values: 'false'
+---
+exception: []
+keys: |-
+  CREATE ALIAS SP_HELLO AS $$
+  String spHello(String value) {
+      return "HELLO: "+value;
+  }
+  $$;
+values: 'false'
+---
+exception: []
+keys: call SP_HELLO('XX');
+values: ['1', PUBLIC.SP_HELLO('XX'), CHARACTER VARYING, '12', '1000000000', '0', 'HELLO:
+    XX']

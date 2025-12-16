@@ -1,0 +1,6 @@
+exception: []
+keys: [POST, HTTP/1.1, 'Accept: application/x-ndjson, plain/text, */*', 'http://localhost:8080',
+  '{"code":23,"msg":"test msg","date":[2022,6,30]}']
+values: [HTTP/1.1, '200', OK, 'Content-Type: application/json', 'Matched-Stub-Id:
+    e13e5de0-7852-460a-ae38-e492b38d9070', 'Transfer-Encoding: chunked', 'x-forward:
+    test', '{"test":"ok"}']

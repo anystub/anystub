@@ -1,19 +1,70 @@
-# anystub   
+# anystub
 
-[![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=org.anystub:anystub&metric=alert_status)](https://sonarcloud.io/dashboard?id=org.anystub:anystub) 
+[![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=org.anystub:anystub&metric=alert_status)](https://sonarcloud.io/dashboard?id=org.anystub:anystub)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.anystub/anystub/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.anystub/anystub)
 
-The library helps you automatically record and maintain http request/responses made with RestTemplate or 
-apache HttpClient 4.x
+A multi-module library that helps you automatically record and replay interactions with external systems in your tests - HTTP requests/responses, JDBC database calls, and reactive WebFlux streams.
 
-Install from Maven Central 
-===
+**Requirements:** Java 17+ (LTS)
 
+## Modules
+
+This project consists of five modules:
+
+- **anystub-core**: Core functionality for creating and managing stubs
+- **anystub-http**: HTTP client stubbing (RestTemplate, Apache HttpClient 4.x)
+- **anystub-jdbc**: JDBC stubbing (DataSource, Connection, Statement, ResultSet)
+- **anystub-flux**: Reactive WebFlux stubbing support
+- **anystub**: Aggregator module (depends on anystub-http + anystub-jdbc for backward compatibility)
+
+## Install from Maven Central
+
+### For HTTP stubbing only:
+``` xml
+    <dependency>
+      <groupId>org.anystub</groupId>
+      <artifactId>anystub-http</artifactId>
+      <version>2.0.0</version>
+      <scope>test</scope>
+    </dependency>
+```
+
+### For JDBC stubbing only:
+``` xml
+    <dependency>
+      <groupId>org.anystub</groupId>
+      <artifactId>anystub-jdbc</artifactId>
+      <version>2.0.0</version>
+      <scope>test</scope>
+    </dependency>
+```
+
+### For both HTTP and JDBC stubbing (backward compatible):
 ``` xml
     <dependency>
       <groupId>org.anystub</groupId>
       <artifactId>anystub</artifactId>
-      <version>0.9.0</version>
+      <version>2.0.0</version>
+      <scope>test</scope>
+    </dependency>
+```
+
+### For Reactive WebFlux stubbing:
+``` xml
+    <dependency>
+      <groupId>org.anystub</groupId>
+      <artifactId>anystub-flux</artifactId>
+      <version>2.0.0</version>
+      <scope>test</scope>
+    </dependency>
+```
+
+### For core functionality only:
+``` xml
+    <dependency>
+      <groupId>org.anystub</groupId>
+      <artifactId>anystub-core</artifactId>
+      <version>2.0.0</version>
       <scope>test</scope>
     </dependency>
 ```

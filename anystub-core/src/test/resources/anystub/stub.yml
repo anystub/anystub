@@ -1,0 +1,7 @@
+exception: []
+keys: [qwe, stringkey]
+values: xxx
+---
+exception: [java.util.NoSuchElementException, null]
+keys: [rand, '1002', notakey]
+values: []

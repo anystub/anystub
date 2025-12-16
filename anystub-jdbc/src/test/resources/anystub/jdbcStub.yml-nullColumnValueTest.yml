@@ -1,0 +1,22 @@
+exception: []
+keys: DROP TABLE NPETABLE IF EXISTS
+values: 'false'
+---
+exception: []
+keys: |-
+  CREATE TABLE NPETABLE(
+  ID BIGINT PRIMARY KEY AUTO_INCREMENT,
+  C_DATE DATE);
+values: 'false'
+---
+exception: []
+keys: ['insert into NPETABLE (C_DATE) values (?)', setNull, '1']
+values: '1'
+---
+exception: []
+keys: ['insert into NPETABLE (C_DATE) values (?)', getGeneratedKeys]
+values: '0'
+---
+exception: []
+keys: ['select * from NPETABLE where id =?', '1']
+values: ['2', ID, BIGINT, '-5', '64', '0', C_DATE, DATE, '91', '10', '0', '1', null]

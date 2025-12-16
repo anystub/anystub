@@ -1,0 +1,128 @@
+{{>licenseInfo}}
+
+package {{package}};
+
+{{#imports}}import {{import}};
+{{/imports}}
+
+import {{invokerPackage}}.ApiClient;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+
+import org.anystub.mgmt.BaseManagerFactory;
+import org.anystub.DecoderResponseEntity;
+import org.anystub.EncoderResponseEntity;
+import org.anystub.StringUtil;
+import com.fasterxml.jackson.core.type.TypeReference;
+
+
+{{^fullJavaUtil}}
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+{{/fullJavaUtil}}
+
+/**
+ * Anystub Proxy for {{classname}}
+ */
+
+@Primary
+@Component
+public class {{classname}}Test extends {{classname}} {
+
+    private final {{classname}} api;
+    private final String fallbackStub;
+    public {{classname}}Test(@Qualifier("{{package}}.{{classname}}")  {{classname}} api) {
+        this.api = api;
+        this.fallbackStub = null;
+    }
+
+
+    @Override
+    public ApiClient getApiClient() {
+        return this.api.getApiClient();
+    }
+
+
+        {{#operations}}{{#operation}}
+        /**
+         * {{summary}}
+         *
+         * {{notes}}
+         *
+         * @throws RestClientException
+         *          if the Api call fails
+         */
+         @Override
+         public
+         {{#returnType}}{{{.}}} {{/returnType}}{{^returnType}}void {{/returnType}}
+         {{operationId}} (
+            {{#allParams}}
+            {{#isFile}}
+            {{#useAbstractionForFiles}}{{#collectionFormat}}java.util.Collection<org.springframework.core.io.Resource>{{/collectionFormat}}{{^collectionFormat}}org.springframework.core.io.Resource{{/collectionFormat}}{{/useAbstractionForFiles}}
+            {{^useAbstractionForFiles}}{{{dataType}}}{{/useAbstractionForFiles}}
+            {{/isFile}}{{^isFile}}{{{dataType}}}{{/isFile}} {{paramName}}{{^-last}}, {{/-last}}
+            {{/allParams}}
+         ) throws RestClientException {
+
+            {{#returnType}}
+                return BaseManagerFactory.locate(fallbackStub)
+                    .request(() -> api.{{operationId}}({{#allParams}} {{paramName}}{{^-last}}, {{/-last}} {{/allParams}}),
+                            new TypeReference<{{{.}}}>() {},
+                            "{{operationId}}" {{#allParams}}, {{paramName}} {{/allParams}});
+            {{/returnType}}
+
+            {{^returnType}}
+                BaseManagerFactory.locate(fallbackStub)
+                    .post(() -> api.{{operationId}}({{#allParams}} {{paramName}}{{^-last}}, {{/-last}} {{/allParams}}),
+                            "{{operationId}}" {{#allParams}}, {{paramName}} {{/allParams}});
+            {{/returnType}}
+
+
+         }
+
+         @Override
+         public
+         ResponseEntity<{{#returnType}}{{{.}}} {{/returnType}}{{^returnType}}Void {{/returnType}}>
+         {{operationId}}WithHttpInfo (
+            {{#allParams}}
+            {{#isFile}}
+            {{#useAbstractionForFiles}}{{#collectionFormat}}java.util.Collection<org.springframework.core.io.Resource>{{/collectionFormat}}{{^collectionFormat}}org.springframework.core.io.Resource{{/collectionFormat}}{{/useAbstractionForFiles}}
+            {{^useAbstractionForFiles}}{{{dataType}}}{{/useAbstractionForFiles}}
+            {{/isFile}}{{^isFile}}{{{dataType}}}{{/isFile}} {{paramName}}{{^-last}}, {{/-last}}
+            {{/allParams}}
+         ) throws RestClientException {
+            {{#returnType}}
+                return  BaseManagerFactory.locate(fallbackStub)
+                    .request2(() -> api.{{operationId}}WithHttpInfo({{#allParams}} {{paramName}}{{^-last}}, {{/-last}} {{/allParams}}),
+                        new DecoderResponseEntity<{{{.}}}>(new TypeReference<{{{.}}}>(){}),
+                        new EncoderResponseEntity<>(),
+                        StringUtil.toArray("{{operationId}}WithHttpInfo" {{#allParams}}, {{paramName}} {{/allParams}}));
+            {{/returnType}}
+
+            {{^returnType}}
+                return  BaseManagerFactory.locate(fallbackStub)
+                    .request2(() -> api.{{operationId}}WithHttpInfo({{#allParams}} {{paramName}}{{^-last}}, {{/-last}} {{/allParams}}),
+                        new DecoderResponseEntity<Void>(new TypeReference<Void>(){}),
+                        new EncoderResponseEntity<>(),
+                        StringUtil.toArray("{{operationId}}WithHttpInfo" {{#allParams}}, {{paramName}} {{/allParams}}));
+            {{/returnType}}
+
+         }
+         {{/operation}}{{/operations}}
+
+}

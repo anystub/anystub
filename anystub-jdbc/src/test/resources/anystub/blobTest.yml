@@ -1,0 +1,51 @@
+exception: []
+keys: DROP TABLE BLOBREPORT IF EXISTS
+values: 'false'
+---
+exception: []
+keys: |-
+  CREATE TABLE BLOBREPORT(
+  ID BIGINT PRIMARY KEY AUTO_INCREMENT,
+  NAME VARCHAR(255) NOT NULL,
+  IMAGE BLOB
+  );
+values: 'false'
+---
+exception: []
+keys: ['insert into BLOBREPORT (NAME, IMAGE) values (?, ?)', '1', TEXT, setBlob, '2']
+values: '1'
+---
+exception: []
+keys: ['insert into BLOBREPORT (NAME, IMAGE) values (?, ?)', getGeneratedKeys]
+values: ['1', ID, BIGINT, '-5', '64', '0', '1']
+---
+exception: []
+keys: ['select * from BLOBREPORT where id =?', '1']
+values: ['3', ID, BIGINT, '-5', '64', '0', NAME, CHARACTER VARYING, '12', '255', '0',
+  IMAGE, BINARY LARGE OBJECT, '2004', '2147483647', '0', '1', TEXT, blob content]
+---
+exception: []
+keys: DROP TABLE BLOBREPORT IF EXISTS
+values: 'false'
+---
+exception: []
+keys: |-
+  CREATE TABLE BLOBREPORT(
+  ID BIGINT PRIMARY KEY AUTO_INCREMENT,
+  NAME VARCHAR(255) NOT NULL,
+  IMAGE BLOB
+  );
+values: 'false'
+---
+exception: []
+keys: ['insert into BLOBREPORT (NAME, IMAGE) values (?, ?)', '1', TEXT, setBlob, '2']
+values: '1'
+---
+exception: []
+keys: ['insert into BLOBREPORT (NAME, IMAGE) values (?, ?)', getGeneratedKeys]
+values: ['1', ID, BIGINT, '-5', '64', '0', '1']
+---
+exception: []
+keys: ['select * from BLOBREPORT where id =?', '1']
+values: ['3', ID, BIGINT, '-5', '64', '0', NAME, CHARACTER VARYING, '12', '255', '0',
+  IMAGE, BINARY LARGE OBJECT, '2004', '2147483647', '0', '1', TEXT, blob content]

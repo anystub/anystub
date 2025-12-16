@@ -11,6 +11,14 @@ import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Logger;
 
+/**
+ * Utility class for generating random test data.
+ * <p>
+ * NOTE: This class uses pseudorandom number generators (ThreadLocalRandom/Random)
+ * for TEST DATA GENERATION ONLY. It is NOT suitable for cryptographic purposes,
+ * security tokens, passwords, or any security-sensitive operations.
+ * </p>
+ */
 public class RandomGenerator {
 
     private static final Logger log = Logger.getLogger(RandomGenerator.class.getName());
@@ -315,10 +323,11 @@ public class RandomGenerator {
         return null;
     }
 
+    @SuppressWarnings("java:S2245") // Pseudorandom generator is safe for test data generation (not security-sensitive)
     public static Random getRandom() {
         Random r = random;
         // Use ThreadLocalRandom by default for non-cryptographic random generation
-        // This is thread-safe, efficient, and satisfies security scanners
+        // This is thread-safe, efficient, and appropriate for test data generation
         return r != null ? r : ThreadLocalRandom.current();
     }
 

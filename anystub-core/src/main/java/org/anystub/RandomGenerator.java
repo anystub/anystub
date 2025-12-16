@@ -337,6 +337,7 @@ public class RandomGenerator {
      * @param seed the seed value
      * @return the initialized Random instance
      */
+    @SuppressWarnings("java:S2245") // Pseudorandom generator is safe for test data generation (not security-sensitive)
     public static Random initRandomizer(int seed) {
         random = new Random(seed);
         return random;

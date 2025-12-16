@@ -210,6 +210,7 @@
                     <artifactId>maven-gpg-plugin</artifactId>
                     <version>3.1.0</version>
                     <configuration>
+                        <skip>${gpg.skip}</skip>
                         <gpgArguments>
                             <arg>--pinentry-mode</arg>
                             <arg>loopback</arg>
@@ -224,8 +225,7 @@
                             </goals>
                         </execution>
                     </executions>
-                </plugin>
-                <plugin>
+                </plugin>                <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-deploy-plugin</artifactId>
                     <version>3.1.1</version>
@@ -287,6 +287,10 @@
         <!-- Release profile for Maven Central deployment -->
         <profile>
             <id>release</id>
+            <properties>
+                <!-- Enable GPG signing for child modules during release -->
+                <gpg.skip>false</gpg.skip>
+            </properties>
             <build>
                 <plugins>
                     <!-- Central Publishing Maven Plugin for Maven Central -->
@@ -307,13 +311,16 @@
                         <artifactId>maven-javadoc-plugin</artifactId>
                     </plugin>
 
-                    <!-- GPG Plugin -->
+                    <!-- GPG Plugin - skip for parent POM -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
+                        <configuration>
+                            <skip>true</skip>
+                        </configuration>
                     </plugin>
 
-                    <!-- Deploy Plugin -->
+                    <!-- Deploy Plugin (use central-publishing instead) -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-deploy-plugin</artifactId>

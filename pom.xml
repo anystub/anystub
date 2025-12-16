@@ -49,7 +49,10 @@
         <maven.compiler.target>17</maven.compiler.target>
         <java.version>17</java.version>
         <project.scm.id>github</project.scm.id>
+
+        <!-- Skip deployment and signing for parent POM (only deploy child modules) -->
         <gpg.skip>true</gpg.skip>
+        <maven.deploy.skip>true</maven.deploy.skip>
 
         <!-- Dependency versions -->
         <jackson.version>2.17.2</jackson.version>
@@ -288,8 +291,9 @@
         <profile>
             <id>release</id>
             <properties>
-                <!-- Enable GPG signing for child modules during release -->
+                <!-- Enable GPG signing and deployment for child modules during release -->
                 <gpg.skip>false</gpg.skip>
+                <maven.deploy.skip>false</maven.deploy.skip>
             </properties>
             <build>
                 <plugins>
@@ -311,7 +315,7 @@
                         <artifactId>maven-javadoc-plugin</artifactId>
                     </plugin>
 
-                    <!-- GPG Plugin - controlled by gpg.skip property via pluginManagement -->
+                    <!-- GPG Plugin - controlled by gpg.skip property -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>

@@ -1,0 +1,5 @@
+exception: []
+keys: [POST, HTTP/1.1, 'http://localhost:8080', BASE64 Ym9keSBoZXgC]
+values: [HTTP/1.1, '200', OK, 'x-forward: test', 'Content-Type: application/octet-stream',
+  'Matched-Stub-Id: 4be303bf-a89a-4a92-aac7-95b3d25abdb6', 'Transfer-Encoding: chunked',
+  BASE64 bGluZTEKbGluZTIBZW9t]

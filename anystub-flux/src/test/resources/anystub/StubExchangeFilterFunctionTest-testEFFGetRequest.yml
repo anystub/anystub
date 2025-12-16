@@ -1,0 +1,4 @@
+exception: []
+keys: [GET, HTTP/1.1, 'http://localhost:8080']
+values: [HTTP/1.1, '200', OK, 'Matched-Stub-Id: d8593d78-1c46-49f1-8244-a8e5aa1ca8c7',
+  'Transfer-Encoding: chunked', '{"test":"ok"}']

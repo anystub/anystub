@@ -1,0 +1,5 @@
+exception: []
+keys: [GET, HTTP/1.1, 'Accept: application/x-ndjson, plain/text, */*', 'http://localhost:8080']
+values: [HTTP/1.1, '200', OK, 'x-forward: test', 'Content-Type: application/json',
+  'Matched-Stub-Id: d288f497-1ef1-4712-9f7b-1322776d355d', 'Transfer-Encoding: chunked',
+  '{"test":"ok"}']

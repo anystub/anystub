@@ -1,0 +1,11 @@
+
+additionalProperties:
+  dateLibrary: java8
+  restTemplateName: restTemplate
+  generateApiTests: false
+  generateModelTests: false
+files:
+  AUTHORS.md: {}
+  api_test.mustache:
+    templateType: APITests
+    destinationFilename: Proxy.java

@@ -1,0 +1,85 @@
+exception: []
+keys: DROP ALIAS SP_HELLO2 if Exists
+values: 'false'
+---
+exception: []
+keys: |-
+  CREATE ALIAS SP_HELLO2 AS $$
+  String spHello(String value) {
+      return "HELLO: "+value;
+  }
+  $$;
+values: 'false'
+---
+exception: []
+keys: ['call  SP_HELLO2(?);', '1', attempt 1]
+values: 'true'
+---
+exception: []
+keys: ['call  SP_HELLO2(?);', getUpdateCount]
+values: '-1'
+---
+exception: []
+keys: ['call  SP_HELLO2(?);', getResultSet]
+values: ['1', 'PUBLIC.SP_HELLO2(?1)', CHARACTER VARYING, '12', '1000000000', '0',
+  'HELLO: attempt 1']
+---
+exception: []
+keys: ['call  SP_HELLO2(?);', getMoreResults]
+values: 'false'
+---
+exception: []
+keys: ['call  SP_HELLO2(?);', getUpdateCount, '#1']
+values: '-1'
+---
+exception: []
+keys: ['call SP_HELLO2(?);', '1', xx]
+values: 'true'
+---
+exception: []
+keys: ['call SP_HELLO2(?);', getResultSet]
+values: ['1', 'PUBLIC.SP_HELLO2(?1)', CHARACTER VARYING, '12', '1000000000', '0',
+  'HELLO: xx']
+---
+exception: []
+keys: DROP ALIAS SP_HELLO2 if Exists
+values: 'false'
+---
+exception: []
+keys: |-
+  CREATE ALIAS SP_HELLO2 AS $$
+  String spHello(String value) {
+      return "HELLO: "+value;
+  }
+  $$;
+values: 'false'
+---
+exception: []
+keys: ['call  SP_HELLO2(?);', '1', attempt 1]
+values: 'true'
+---
+exception: []
+keys: ['call  SP_HELLO2(?);', getUpdateCount]
+values: '-1'
+---
+exception: []
+keys: ['call  SP_HELLO2(?);', getResultSet]
+values: ['1', 'PUBLIC.SP_HELLO2(?1)', CHARACTER VARYING, '12', '1000000000', '0',
+  'HELLO: attempt 1']
+---
+exception: []
+keys: ['call  SP_HELLO2(?);', getMoreResults]
+values: 'false'
+---
+exception: []
+keys: ['call  SP_HELLO2(?);', getUpdateCount, '#1']
+values: '-1'
+---
+exception: []
+keys: ['call SP_HELLO2(?);', '1', xx]
+values: 'true'
+---
+exception: []
+keys: ['call SP_HELLO2(?);', getResultSet]
+values: ['1', 'PUBLIC.SP_HELLO2(?1)', CHARACTER VARYING, '12', '1000000000', '0',
+  'HELLO: xx']

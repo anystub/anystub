@@ -1,0 +1,4 @@
+request0:
+  exception: []
+  keys: select * from dual
+  values: '0'

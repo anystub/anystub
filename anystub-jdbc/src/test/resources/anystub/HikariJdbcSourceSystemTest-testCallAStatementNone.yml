@@ -1,0 +1,11 @@
+exception: []
+keys: select * from dual
+values: '0'
+---
+exception: []
+keys: [resultSet, next]
+values: 'true'
+---
+exception: []
+keys: [resultSet, next, '#1']
+values: 'false'

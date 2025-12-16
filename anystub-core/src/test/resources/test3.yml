@@ -1,0 +1,12 @@
+allHeaders: true
+headers:
+  - headers
+bodyTrigger:
+  - http
+  - http2
+requestMask:
+  - "password: .{2,10}\\,"
+  - test
+  - test2
+  - test4
+bodyMethods: [test1, test2]

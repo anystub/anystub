@@ -1,0 +1,15 @@
+exception: []
+keys: DROP TABLE UUIDTABLE IF EXISTS
+values: 'false'
+---
+exception: []
+keys: create table UUIDTABLE(id int primary key, data uuid default 'dbfe22f6-3d1c-4a35-9b52-2ee8ce3c424f')
+values: 'false'
+---
+exception: []
+keys: insert into UUIDTABLE(id) values(1);
+values: 'false'
+---
+exception: []
+keys: select * from UUIDTABLE
+values: ['2', ID, INTEGER, '4', '32', '0', DATA, UUID, '-2', '16', '0', '1', '"dbfe22f6-3d1c-4a35-9b52-2ee8ce3c424f"']

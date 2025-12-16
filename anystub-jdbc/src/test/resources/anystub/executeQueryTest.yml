@@ -1,0 +1,4 @@
+request0:
+  exception: [java.lang.NullPointerException, null]
+  keys: select * from dual
+  values: []

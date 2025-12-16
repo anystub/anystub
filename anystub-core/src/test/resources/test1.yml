@@ -1,0 +1,5 @@
+allHeaders: true
+headers: headers
+bodyTrigger: ''
+requestMask: "password: .{2,10}\\,"
+testFilePrefix: false

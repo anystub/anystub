@@ -1,0 +1,5 @@
+headersNotDefined:
+bodyTrigger:
+requestMask: test
+bodyMethods: [test1 , test2]
+

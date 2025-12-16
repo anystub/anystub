@@ -58,7 +58,7 @@
         <snakeyaml.version>2.4</snakeyaml.version>
 
         <!-- SonarCloud -->
-        <sonar.organization>anystub1</sonar.organization>
+        <sonar.organization>anystub</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
 

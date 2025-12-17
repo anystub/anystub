@@ -281,14 +281,10 @@
                 <artifactId>jacoco-maven-plugin</artifactId>
             </plugin>
 
-            <!-- Skip GPG signing for parent POM (not inherited by children) -->
+            <!-- GPG signing - controlled by gpg.skip property -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
-                <inherited>false</inherited>
-                <configuration>
-                    <skip>true</skip>
-                </configuration>
             </plugin>
         </plugins>
     </build>
@@ -322,19 +318,10 @@
                         <artifactId>maven-javadoc-plugin</artifactId>
                     </plugin>
 
-                    <!-- GPG Plugin - controlled by gpg.skip property -->
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-gpg-plugin</artifactId>
-                    </plugin>
-
                     <!-- Deploy Plugin (use central-publishing instead) -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-deploy-plugin</artifactId>
-                        <configuration>
-                            <skip>true</skip>
-                        </configuration>
                     </plugin>
                 </plugins>
             </build>

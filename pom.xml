@@ -49,12 +49,7 @@
         <maven.compiler.target>17</maven.compiler.target>
         <java.version>17</java.version>
         <project.scm.id>github</project.scm.id>
-
-        <!-- Skip GPG signing by default (enabled in release profile) -->
         <gpg.skip>true</gpg.skip>
-
-        <!-- Skip deployment for parent POM (only deploy child modules) -->
-        <maven.deploy.skip>true</maven.deploy.skip>
 
         <!-- Dependency versions -->
         <jackson.version>2.17.2</jackson.version>
@@ -268,7 +263,7 @@
                 <plugin>
                     <groupId>org.sonatype.central</groupId>
                     <artifactId>central-publishing-maven-plugin</artifactId>
-                    <version>0.6.0</version>
+                    <version>0.9.0</version>
                     <extensions>true</extensions>
                     <configuration>
                         <publishingServerId>central</publishingServerId>
@@ -279,71 +274,6 @@
             </plugins>
         </pluginManagement>
 
-        <plugins>
-            <!-- JaCoCo for code coverage -->
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-            </plugin>
-
-            <!-- Skip GPG signing for parent POM (not inherited by children) -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-gpg-plugin</artifactId>
-                <inherited>false</inherited>
-                <configuration>
-                    <skip>true</skip>
-                </configuration>
-            </plugin>
-        </plugins>
     </build>
-
-    <profiles>
-        <!-- Release profile for Maven Central deployment -->
-        <profile>
-            <id>release</id>
-            <properties>
-                <!-- Enable GPG signing and deployment for child modules during release -->
-                <gpg.skip>false</gpg.skip>
-                <maven.deploy.skip>false</maven.deploy.skip>
-            </properties>
-            <build>
-                <plugins>
-                    <!-- Central Publishing Maven Plugin for Maven Central -->
-                    <plugin>
-                        <groupId>org.sonatype.central</groupId>
-                        <artifactId>central-publishing-maven-plugin</artifactId>
-                    </plugin>
-
-                    <!-- Maven Source Plugin -->
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-source-plugin</artifactId>
-                    </plugin>
-
-                    <!-- Maven Javadoc Plugin -->
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-javadoc-plugin</artifactId>
-                    </plugin>
-
-                    <!-- GPG Plugin - controlled by gpg.skip property -->
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-gpg-plugin</artifactId>
-                    </plugin>
-
-                    <!-- Deploy Plugin (use central-publishing instead) -->
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-deploy-plugin</artifactId>
-                        <configuration>
-                            <skip>true</skip>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
 
 </project>

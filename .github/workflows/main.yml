@@ -76,4 +76,4 @@ jobs:
           SERVER_PASSWORD: ${{ secrets.MAVEN_CENTRAL_TOKEN }}
           MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
         run: |
-          mvn -B release:perform -Prelease -Dmaven.deploy.skip=true -Darguments='-Dgpg.skip=false'
+          mvn -B release:perform -Dmaven.deploy.skip=true -Darguments='-Dgpg.skip=false'
